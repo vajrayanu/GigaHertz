@@ -1,0 +1,132 @@
+﻿
+    
+/* Styles for wall
+----------------------------------------------------------*/
+.panel 
+{
+    width: 250px;
+    line-height: 16px;
+    /*background: #DFDFDF;*/
+    padding-top: 1px;
+}
+.panel header {
+    margin: 5px 10px 5px;
+    display: block;
+}
+.panel header > div 
+{
+    margin-bottom: 9px;
+}
+.panel header textarea 
+{
+    font-family: Arial, Helvetica, Sans-Serif;
+    font-size: 12px;
+    line-height: 1.4;
+    width: 100%;
+}
+.rss
+{
+    float:right;
+    padding-top: 24px;
+    border: 0 none;
+    background: url(../content/themes/base/images/rss2.png) no-repeat;
+    text-indent: -9999em;
+	width: 32px;
+	background-position: center center;
+}
+.edit-textarea {
+ width:99%;
+ height: 99%;
+ font-size:14px;
+}
+.edit-box {
+ width:100%;
+ height: 100%;
+}
+.note-text {
+     font-family: Arial, "Helvetica Neue",sans-serif;
+     font-size: 13px;
+     word-wrap: break-word;
+     color: #250517;
+}
+.loader {
+    background-color:#FFFFFF;
+    text-align: left;
+}
+*{
+    margin:0;padding:0;
+}
+ol.nolist {
+    list-style:none;
+}
+ol.nolist li 
+{
+    font-size: 12px;
+    width: auto;
+    display: block;
+    background: transparent;
+    opacity: 0.7;
+    margin: 0;
+    padding: 0 10px 9px;
+    text-align: center;
+}
+ol.timeline {
+    list-style:none;
+}
+ol.timeline li {
+    display: none;
+    border-top: 1px dashed #929292; 
+ 
+    /*background-color: #FFE87C; */
+    min-height: 15px;
+    position: relative;
+    padding: 1px 0;
+}
+ol.timeline li aside 
+{
+    position: absolute;
+    display: none;
+    right: 0;
+    top: 9px;
+}
+ol.timeline li:hover aside
+{
+    display: block;
+    /*background: #FFE87C;*/
+    padding-left: 5px;
+    padding-bottom: 2px;
+}
+ol.timeline li p 
+{
+    padding: 1px 10px 0 10px;
+    margin: 0;
+}
+ol.timeline li footer 
+{
+    font-size: 11px;
+    width: auto;
+    display: block;
+    background: transparent;
+    opacity: 0.7;
+    margin: 0;
+    padding: 0 10px 9px;
+    text-align: left;
+}
+.hashtag {
+    font-size: 15px;
+    color : #C35617 !important;
+}
+#loadOlder 
+{
+    display: block;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-weight:bold;
+    /*background: #fff;*/
+}
+#loadOlder:hover 
+{
+    background: #EA8511;
+    color: #fff;
+}

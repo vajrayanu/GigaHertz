@@ -1,0 +1,728 @@
+﻿
+@model GH.Web.Models.ReportDayViewModel
+<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th2.js")"></script>
+<script src="@Url.Content("~/Scripts/datepicker/jquery-ui-1.8.10.offset.datepicker.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $(function () {
+
+        var d = new Date();
+        var toDay = (d.getMonth() + 1) + '/' + d.getDate() + '/' + (d.getFullYear() + 543);
+
+        $("#DateStart").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        });
+
+        $("#DateEnd").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        });
+    });
+});
+
+function Print() {
+
+    var printContents = document.getElementById("printContent").innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+
+</script>
+
+@using (Html.BeginForm())
+{
+    if (Model.Report != null)
+    {
+        <table>
+         <tr>
+            <td>
+                @Html.LabelFor(model => model.DateStart, new { @class = "label" })
+            </td>
+            <td>
+                @Html.LabelFor(model => model.DateEnd, new { @class = "label" })
+            </td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>
+                @Html.TextBox("DateStart", Model.DateStart.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                @Html.TextBox("DateEnd", Model.DateEnd.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                <button type="submit" id="LoadRecordsButton" class="buttonStyle">สร้างรายงาน</button>
+                <button type="button" id="print" class="buttonStyle" onclick="Print();">พิมพ์</button>
+            </td>
+        </tr>
+        </table>   
+   
+        if (Model.Report.Repairs.Count > 0)
+        {
+            <div id="printContent">
+            <style>
+                .tb1 tr td
+                {
+    	            /*border:1px solid #cccccc;#CFCDC9*/
+                    font-size:.8em;
+                    border: solid 1px #CFCDC9;
+                    border-collapse: collapse;
+                    white-space: nowrap;
+                }
+                .tb1 tr td.header
+                {
+    	            font-weight:bold;
+    	            font-size:.8em;
+    	            text-align:center;
+                }
+    
+                .rotate 
+                {
+                  /* Safari */
+                  -webkit-transform: rotate(-90deg);
+                  /* Firefox */
+                  -moz-transform: rotate(-90deg);
+                  /* IE */
+                  -ms-transform: rotate(-90deg);
+                  /* Opera */
+                  -o-transform: rotate(-90deg);
+                  /* Internet Explorer */
+                  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+                }
+            </style>
+            <table class="tb1">
+                <tr>
+                    @{int colspan = 18 + (@Model.Report.Insurances.Where(m=>m.IsAgent==true).Count() * 2)
+                          + @Model.Report.TCStaffs.Count
+                          + @Model.Report.STCStaffs.Count
+                          + @Model.Report.QCStaffs.Count;}
+                    <td class="header" colspan="@colspan">@ViewBag.ReportHeader</td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="3">@Html.Label(" ")</td>
+                    <td colspan="10">รายการซ่อม</td>
+                    <td colspan="@Model.Report.Insurances.Where(m=>m.IsAgent==true).Count()">บริการซ่อมศูนย์(เคลม)</td>
+                    <td colspan="@Model.Report.Insurances.Where(m => m.IsAgent == true).Count()">ค่าบริการศูนย์</td>
+                    <td colspan="3">รับ</td>
+                    <td colspan="2">จ่าย</td>
+                    <td colspan="@Model.Report.TCStaffs.Count">ผลงานช่าง</td>
+                    <td colspan="@Model.Report.STCStaffs.Count">ผลงาน หน.ช่าง</td>
+                    <td colspan="@Model.Report.QCStaffs.Count">ผลงาน QC</td>
+                </tr>
+                <tr>
+                    <td >ลำดับ</td>
+                    <td >ลูกค้า</td>
+                    <td >โทรศัพท์</td>
+                    <td >JOB</td>
+                    <td >มาซ่อม</td>
+                    <td >รับแล้ว</td>
+                    <td >ปกติ</td>
+                    <td >ตีกลับ</td>
+                    <td >ยกเลิก</td>
+                    <td >มีประกัน</td>
+                    <td >ฟรี</td>
+                    <td >มีค่าบริการ</td>
+                    <td >HP on site</td>
+                    @foreach (var ins in Model.Report.Insurances.Where(m => m.IsAgent == true))
+                    {
+                        <td>@Html.Encode(ins.sInsuranceName)</td>
+                    }
+                    @foreach (var ins in Model.Report.Insurances.Where(m => m.IsAgent == true))
+                    {
+                        <td>@Html.Encode(ins.sInsuranceName)</td>
+                    }
+                    <td>สด</td>
+                    <td>เชื่อ</td>
+                    <td>EXP</td>
+                    <td>สด</td>
+                    <td>เชื่อ</td>
+                    @foreach (var ins in Model.Report.TCStaffs)
+                    {
+                        <td>@Html.Encode(ins.sStaffName)</td>
+                    }
+                    @foreach (var ins in Model.Report.STCStaffs)
+                    {
+                        <td>@Html.Encode(ins.sStaffName)</td>
+                    }
+                    @foreach (var ins in Model.Report.QCStaffs)
+                    {
+                        <td>@Html.Encode(ins.sStaffName)</td>
+                    }
+                </tr>
+                @{ int RowNum = 0;
+                   bool byPass = true;
+                   var closeStatus = GH.DAL.SQLDAL.CloseStatusManager.GetAll();
+                }
+                @foreach (var item in Model.Report.Repairs.OrderByDescending(m=>m.sRepairNo))
+                {
+                    RowNum++;
+                    if (item.dtDateAdd.Value.DayOfYear.CompareTo(Model.DateStart.DayOfYear) >= 0 && item.IsComplete != true)
+                    {
+                        byPass = false;
+                    }
+                    if (item.dtDateUpdate.Value.DayOfYear >= Model.DateStart.DayOfYear && item.IsCustomerRecieved == true)
+                    {
+                        byPass = true;
+                    }
+                    <tr >
+                        <td >@Html.Encode(RowNum)</td>
+                        <td >@Html.Encode(item.vCustomerName)</td>
+                        <td >
+                            @if (!string.IsNullOrEmpty(item.vCustomerPhone))
+                            {
+                                @Html.Encode(item.vCustomerPhone)
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @Html.Encode(item.sRepairNo)
+                        </td>
+                        <td >
+                            @if (item.dtDateAdd.Value.DayOfYear.CompareTo(Model.DateStart.DayOfYear) == 0 || item.dtDateAdd.Value.Year.CompareTo(Model.DateStart.Year) >= 0 && item.dtDateAdd >= Model.DateStart)
+                            { //|| item.dtDateAdd.Value.Year.CompareTo(Model.DateStart.Year) >= 0 && item.dtDateAdd >= Model.DateStart
+                                @Html.Label("X")
+                            }
+
+                            @*else if (item.dtDateAdd.Value.Year.CompareTo(Model.DateStart.Year) >= 0 && item.dtDateAdd >= Model.DateStart)
+                            {
+                                @Html.Label("X2")
+                            }
+                            @*else if (item.dtDateAdd.ToString().CompareTo(Model.DateStart.ToString()) >= 0 || item.dtDateAdd.ToString().CompareTo(Model.DateEnd.ToString()) <= 0)
+                            {
+                                @Html.Label("X3")
+                            }*@
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+
+                        </td>
+                        <td >
+                            @if (item.dtDateUpdate.ToString().CompareTo(Model.DateStart.ToString()) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <=0 && item.IsCustomerRecieved == true && item.IsComplete == true)
+                            {
+                                if (byPass == true)
+                                {
+                                    @Html.Label("X")
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            @*else if (item.dtDateUpdate.Value.DayOfYear <= Model.DateStart.DayOfYear && item.IsCustomerRecieved == true && item.IsComplete == true)
+                            {
+                                @Html.Label("X2")
+                            }*@
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.kCloseStatusId.ToString().ToUpper().Equals("1C54073A-BFD8-41B4-B9AE-91FD9042514C"))
+                            {
+                                if (byPass == true)
+                                {
+                                    @Html.Label("X")
+                                }
+                                else
+                                {
+                                  @Html.Label(" ")
+                                }
+                            }
+                            else
+                           {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                           @if (item.kCloseStatusId.ToString().ToUpper().Equals("47AC8A37-C1B0-419A-975E-76F1C17B8C70"))
+                           {
+                               if (byPass == true)
+                               {
+                                    @Html.Label("X")
+                               }
+                               else
+                               {
+                                    @Html.Label(" ")
+                               }
+                           }
+                           else
+                           {
+                                @Html.Label(" ")
+                           }
+                        </td>
+                        <td >
+                            @if (item.kCloseStatusId.ToString().ToUpper().Equals("49CBC40D-310A-4E09-AC4C-8934C5A0F900"))
+                            {
+                                if (byPass == true)
+                                {
+                                    @Html.Label("X")
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                           @if (item.kCloseStatusId.ToString().ToUpper().Equals("38DBF61A-038E-4AAB-8921-FD24FF842698"))
+                           {
+                               if (byPass == true)
+                               {
+                                    @Html.Label("X")
+                               }
+                               else
+                               {
+                                    @Html.Label(" ")
+                               }
+                           }
+                           else
+                           {
+                                @Html.Label(" ")
+                           }
+                        </td>
+                        <td >
+                            @if (item.kCloseStatusId.ToString().ToUpper().Equals("C78CD4C7-F334-4874-999F-A86090588E16"))
+                            {
+                                if (byPass == true)
+                                {
+                                    @Html.Label("X")
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.kCloseStatusId.ToString().ToUpper().Equals("AAC726FA-1637-40F7-A312-A8BE41893F83"))
+                            {
+                                if (byPass == true && item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.Value.Date >= Model.DateStart.Date && item.dtDateUpdate.Value.Date <= Model.DateEnd.Date)
+                                {
+                                    @Html.Label("X")
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.kCloseStatusId.ToString().ToUpper().Equals("B4DF2696-6E8E-49E7-8323-974982BE726B"))
+                            {
+                                if (byPass == true)
+                                {
+                                    @Html.Label("X")
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        @foreach (var ins in Model.Report.Insurances.Where(m => m.IsAgent == true))
+                        {
+                            <td>
+                            @if (item.Claim != null)
+                            {
+                                if (item.Claim.kInsuranceId == ins.kInsuranceId)
+                                {
+                                    if (byPass == true)
+                                    {//x+1
+                                        @Html.Label("X")
+                                    }
+                                    else
+                                    {
+                                        @Html.Label(" ")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                            </td>
+                        }
+                        @foreach (var ins in Model.Report.Insurances.Where(m => m.IsAgent == true))
+                        {
+                            <td>
+                            @if (item.Claim != null)
+                            {
+                                if (byPass == true)
+                                {
+                                    if (item.Claim.kInsuranceId == ins.kInsuranceId)
+                                    {
+                                        @Html.Label(string.Format("{0:0,0}", item.Claim.ClaimCauses.Sum(m => m.dPrice).Value))
+                                    }
+                                    else
+                                    {
+                                        @Html.Label(" ")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                            </td>
+                        }
+                        <td >
+                            @if (!item.sRepairNo.Contains("E") && item.IsNoCredit == true)
+                            {   //สด
+                                if (byPass == true && (item.RepairCauses.Sum(m => m.dPrice) != 0 && item.dtDateUpdate.Value.Date >= Model.DateStart.Date && item.dtDateUpdate.Value.Date <= Model.DateEnd.Date))
+                                {
+                                    @Html.Encode(item.RepairCauses.Sum(m => m.dPrice).ToString())
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (!item.sRepairNo.Contains("E") && item.IsNoCredit != true)
+                            {   //เชื่อ && item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <= 0
+                                if (byPass == true && (item.RepairCauses.Sum(m => m.dPrice) != 0))
+                                {
+                                    @Html.Encode(item.RepairCauses.Sum(m => m.dPrice).ToString())
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.sRepairNo.Contains("E"))
+                            {    //&& item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <= 0
+                                if (byPass == true && (item.RepairCauses.Sum(m => m.dPrice) != 0) && item.dtDateUpdate.Value.Date >= Model.DateStart.Date && item.dtDateUpdate.Value.Date <= Model.DateEnd.Date)
+                                {
+                                    @Html.Encode(item.RepairCauses.Sum(m => m.dPrice).ToString())
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+
+                        <td >
+                            @if (item.Claim != null && item.Claim.IsNoCredit == true && item.IsComplete == true && item.IsCustomerRecieved == true)
+                            {
+                                if (byPass == true)
+                                {
+                                        @Html.Encode(item.Claim.ClaimCauses.Sum(m => m.dPrice).ToString())
+                                }
+                                else
+                                {
+                                        @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.Claim != null && item.Claim.IsNoCredit != true && item.IsComplete == true && item.IsCustomerRecieved == true)
+                            {
+                                if (byPass == true && (item.Claim.ClaimCauses.Sum(m => m.dPrice) != 0))
+                                {
+                                    @Html.Encode(item.Claim.ClaimCauses.Sum(m => m.dPrice).ToString())
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        @foreach (var ins in Model.Report.TCStaffs.OrderBy(m => m.sStaffName))
+                        {
+                            <td>
+                            @if (item.Staff != null)
+                            {
+                                if (byPass == true)
+                                {
+                                    if (item.kStaffId == ins.kStaffId)
+                                    {
+                                        if (item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.ToString().CompareTo(Model.DateStart.ToString()) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <= 0)
+                                        { //x+2
+                                            @Html.Label("X")
+                                        }
+                                        else
+                                        {
+                                            @Html.Label(" ")
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @Html.Label(" ")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                            </td>
+                        }
+                        @foreach (var ins in Model.Report.STCStaffs)
+                        {
+                            <td>
+                            @if (item.Staff != null)
+                            {
+                                if (byPass == true)
+                                {
+                                    if (item.kOwnerId == ins.kStaffId)
+                                    {
+                                        if (item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.ToString().CompareTo(Model.DateStart.ToString()) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <= 0)
+                                        {//x+3
+                                            @Html.Label("X")
+                                        }
+                                        else
+                                        {
+                                            @Html.Label(" ")
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @Html.Label(" ")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                            </td>
+                        }
+                        @foreach (var ins in Model.Report.QCStaffs)
+                        {
+                            <td>
+                            @if (item.Staff != null)
+                            {
+                                if (byPass == true)
+                                {
+                                    if (item.kQCId == ins.kStaffId)
+                                    {
+                                        if (item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.ToString().CompareTo(Model.DateStart.ToString()) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <= 0)
+                                        { //x+4
+                                            @Html.Label("X")
+                                        }
+                                        else
+                                        {
+                                            @Html.Label(" ")
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @Html.Label(" ")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label(" ")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                            </td>
+                        }
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4">รวม</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.dtDateAdd.Value.DayOfYear.CompareTo(Model.DateStart.DayOfYear) == 0 || m.dtDateAdd.Value.Year.CompareTo(Model.DateStart.Year) >= 0 && m.dtDateAdd >= Model.DateStart).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.IsCustomerRecieved == true && m.dtDateUpdate.Value.Date >= Model.DateStart.Date && m.dtDateUpdate.Value.Date <= Model.DateEnd.Date ).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.kCloseStatusId.ToString().ToUpper().Equals("1C54073A-BFD8-41B4-B9AE-91FD9042514C")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.kCloseStatusId.ToString().ToUpper().Equals("47AC8A37-C1B0-419A-975E-76F1C17B8C70")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.kCloseStatusId.ToString().ToUpper().Equals("49CBC40D-310A-4E09-AC4C-8934C5A0F900")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.kCloseStatusId.ToString().ToUpper().Equals("38DBF61A-038E-4AAB-8921-FD24FF842698")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.kCloseStatusId.ToString().ToUpper().Equals("C78CD4C7-F334-4874-999F-A86090588E16")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.kCloseStatusId.ToString().ToUpper().Equals("AAC726FA-1637-40F7-A312-A8BE41893F83")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.kCloseStatusId.ToString().ToUpper().Equals("B4DF2696-6E8E-49E7-8323-974982BE726B")).ToList().Count)</td>
+                    @foreach (var ins in Model.Report.Insurances.Where(m => m.IsAgent == true))
+                    {
+                        <td> 
+                        @{
+                        int countClaim = 0;
+                        foreach (var item in Model.Report.Repairs)
+                        {
+                            if (item.Claim != null)
+                            {
+                                if (item.IsComplete == true && item.Claim.kInsuranceId == ins.kInsuranceId)
+                                {
+                                    countClaim++;
+                                }
+                            }
+                        }
+                        }
+                        @Html.Label(countClaim.ToString())
+                        </td>
+                    }
+                    @foreach (var ins in Model.Report.Insurances.Where(m => m.IsAgent == true))
+                    {
+                        <td> 
+                        @{
+                        Decimal sumPrice = 0;
+                        foreach (var item in Model.Report.Repairs)
+                        {
+                            if (item.Claim != null)
+                            {
+                                if (item.IsComplete == true && item.Claim.kInsuranceId == ins.kInsuranceId)
+                                {
+                                    sumPrice += item.Claim.ClaimCauses.Sum(m => m.dPrice).Value;
+                                }
+                            }
+                        }
+                        }
+                        @Html.Label(string.Format("{0:0,0}", sumPrice))
+                        </td>
+                    }
+                    @*<td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.IsNoCredit == true).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.IsNoCredit != true).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.sRepairNo.Contains("E")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.Claim != null && m.Claim.IsNoCredit == true).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.Claim != null && m.Claim.IsNoCredit != true).ToList().Count)</td>*@
+                    
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.IsNoCredit == true && m.dtDateUpdate.Value.Date >= Model.DateStart.Date && m.dtDateUpdate.Value.Date <= Model.DateEnd.Date && !m.sRepairNo.Contains("E")).Sum(m => m.RepairCauses.Sum(n => n.dPrice)))</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.IsNoCredit != true && !m.sRepairNo.Contains("E")).Sum(m => m.RepairCauses.Sum(n => n.dPrice)))</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.IsCustomerRecieved == true && m.dtDateUpdate.Value.Date >= Model.DateStart.Date && m.dtDateUpdate.Value.Date <= Model.DateEnd.Date && m.sRepairNo.Contains("E")).Sum(m => m.RepairCauses.Sum(n => n.dPrice)))</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.Claim != null && m.Claim.IsNoCredit == true).Sum(m => m.Claim.ClaimCauses.Sum(n => n.dPrice)))</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsComplete == true && m.Claim != null && m.Claim.IsNoCredit != true).Sum(m => m.Claim.ClaimCauses.Sum(n => n.dPrice)))</td>
+                    
+                    @foreach (var ins in Model.Report.TCStaffs.OrderBy(m => m.sStaffName))
+                    {
+                        <td> 
+                        @{
+                        int countStaff = 0;
+                        foreach (var item in Model.Report.Repairs)
+                        {
+                            if (item.kStaffId == ins.kStaffId)
+                            {
+                                if (item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.ToString().CompareTo(Model.DateStart.ToString()) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <= 0)
+                                {
+                                    countStaff++;
+                                }
+                            } //x2
+                        }
+                        }
+                        @Html.Label(countStaff.ToString())
+                        </td>
+                    }
+                    @foreach (var ins in Model.Report.STCStaffs)
+                    {
+                        <td> 
+                        @{
+                        int countStaff = 0;
+                        foreach (var item in Model.Report.Repairs)
+                        {
+                            if (item.kOwnerId == ins.kStaffId)
+                            { // x3
+                                if (item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 )
+                                {
+                                    countStaff++;
+                                }
+                            }
+                        }
+                        }
+                        @Html.Label(countStaff.ToString())
+                        </td>
+                    }
+                    @foreach (var ins in Model.Report.QCStaffs)
+                    {
+                        <td> 
+                        @{
+                        int countStaff = 0;
+                        foreach (var item in Model.Report.Repairs)
+                        {
+                            if (item.kQCId == ins.kStaffId)
+                            { //x4
+                                if (item.IsComplete == true && item.IsCustomerRecieved == true && item.dtDateUpdate.ToString().CompareTo(Model.DateStart.ToString()) >= 0 && item.dtDateUpdate.Value.Date.CompareTo(Model.DateEnd.Date) <= 0 || item.dtDateUpdate.Value.Date.CompareTo(Model.DateStart.Date) <= 0)
+                                {
+                                    countStaff++;
+                                }
+                            }
+                        }
+                        }
+                        @Html.Label(countStaff.ToString())
+                        </td>
+                    }
+                </tr>
+            </table>
+            </div>
+        }
+        else
+        {
+            @Html.Label("ไม่พบข้อมูล!")
+        }
+    }
+}
+
+   
+
+  
+

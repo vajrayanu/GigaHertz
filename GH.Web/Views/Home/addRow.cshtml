@@ -1,0 +1,100 @@
+﻿@model GH.Web.Models.BookingViewModel
+
+<SCRIPT language="javascript">
+    $().ready(function () {
+        $("#jtSearching").autocomplete({
+            source: '@Url.Action("Search2", "Cause")',
+             minLength: 1,
+             select: function (event, ui) {
+                 $('#description').val(ui.item.description);
+                 $('#price').val(ui.item.price);
+                 //return false;
+             }
+        });
+    });  
+
+
+    function addRow(tableID) {
+
+        var table = document.getElementById(tableID);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        var cell1 = row.insertCell(0);
+        var element1 = document.createElement("input");
+        element1.type = "checkbox";
+        cell1.appendChild(element1);
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = rowCount;
+
+        var cell3 = row.insertCell(2);
+        var element2 = document.createElement("input");
+        element2.type = "text";
+        element2.placeholder = "คำอธิบาย";
+        element2.id = "desc_" + rowCount;
+        element2.name = "desc_" + rowCount;
+        element2.value = $('#description').val();
+        cell3.appendChild(element2);
+
+        var cell4 = row.insertCell(3);
+        var element3 = document.createElement("input");
+        element3.type = "text";
+        element3.placeholder = "ราคา";
+        element3.id = "price_" + rowCount;
+        element3.name = "price_" + rowCount;
+        element3.value = $('#price').val();
+        cell4.appendChild(element3);
+
+        // clear value 
+        $('#jtSearching').val('');
+        $('#description').val('');
+        $('#price').val('');
+
+    }
+
+    function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for (var i = 1; i < rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if (null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+        } catch (e) {
+            alert(e);
+        }
+    }
+ 
+</SCRIPT>
+@*
+@Html.TextAreaFor(model => model.Repair.sCauses, new { @class = "text_field" })*@
+<input type="text" id="jtSearching" name="jtSearching" placeholder="ค้นหา..." class="textBoxStyle" />
+<input type="text" id="description" name="description" style="display:none" />
+<input type="text" id="price" name="price" style="display:none" />
+@using (Html.BeginForm())
+{
+        
+    <INPUT type="button" value="Add Row" onclick="addRow('dataTable')" class="buttonStyle" />
+ 
+    <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" class="buttonStyle" />
+ 
+    <TABLE id="dataTable" width="350px" border="1">
+        <TR>
+            @*<TD><INPUT type="checkbox" name="chk"/></TD>
+            <TD> 1 </TD>
+            <TD> <INPUT id="desc_0" name="desc_0" type="text" placeholder="คำอธิบาย" /> </TD>
+            <TD> <INPUT id="price_0" name="price_0" type="text" placeholder="ราคา" /> </TD>*@
+        </TR>
+    </TABLE>
+    <input type="submit" />
+}

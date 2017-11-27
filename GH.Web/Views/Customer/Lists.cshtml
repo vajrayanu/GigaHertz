@@ -1,0 +1,160 @@
+﻿<div class="navButton">
+    <form>
+        <input type="text" id="jtSearching" name="jtSearching" placeholder="....." class="textBoxStyle" />
+        <button type="submit" id="LoadRecordsButton" class="buttonStyle">ค้นหา</button>
+     </form>
+</div>
+
+<div id="tbLists">
+</div>
+
+<script type="text/javascript">
+    
+
+    $(document).ready(function () {
+        $(function () {
+            $('#jtSearching').autocomplete({
+                source: '@Url.Action("Search")',
+                minLength: 1,
+                select: function (event, ui) {
+                    //$('#jtSearching').val(ui.item.label);
+                    //return false;
+                    LoadData();
+                }
+            });
+        });
+
+        LoadData();
+    });
+
+    function LoadData() {
+        $('#tbLists').jtable({
+            title: 'รายชื่อลูกค้า',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            defaultSorting: 'Name ASC',
+            actions: {
+                listAction: '@Url.Action("Lists")',
+                deleteAction: '@Url.Action("Delete")',
+                updateAction: '@Url.Action("Edit")',
+                createAction: '@Url.Action("Create")'
+            },
+            fields: {
+                kCustomerId: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                vFullName: {
+                    create: false,
+                    edit: false,
+                    title: 'ลุกค้า'
+                },
+                sCustomerName: {
+                    inputClass: 'validate[required]',
+                    title: 'ชื่อ',
+                    list: false
+                },
+                sAddress1: {
+                    title: 'ที่อยู่',
+                    type: 'textarea',
+                    list: false
+                },
+                sCity: {
+                    title: 'จังหวัด',
+                    list: false
+                },
+                sZip: {
+                    title: 'รหัสไปรษณีย์',
+                    inputClass: 'validate[custom[integer]]',
+                    list: false
+                },
+                sPhone: {
+                    title: 'โทรศัพท์',
+                    inputClass: 'validate[custom[phone]]'
+                },
+                sMobile: {
+                    title: 'มือถือ',
+                    inputClass: 'validate[custom[phone]]'
+                },
+                sFax: {
+                    title: 'โทรสาร',
+                    inputClass: 'validate[custom[phone]]',
+                    list: false
+                },
+                sEmailAddress: {
+                    title: 'อีเมล',
+                    inputClass: 'validate[custom[email]]'
+                },
+                //CHILD TABLE DEFINITION FOR "BOOKING REPAIRS"
+                Repairs: {
+                    title: '',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    listClass: 'child-opener-image-column',
+                    display: function (data) {
+                        //Create an image that will be used to open child table
+                        var $img = $('<img class="child-opener-image" src="/Images/arrow.png" title="รายการสินค้าส่งซ่อม" />');
+                        //Open child table when user clicks the image
+                        $img.click(function () {
+                            $('#tbLists').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: '[' + data.record.sCustomerName + ']',
+                                        actions: {
+                                            listAction: '@Url.Action("GetRepairs","Customer")?id=' + data.record.kCustomerId
+                                        },
+                                        fields: {
+                                            RepairNo: {
+                                                title: 'เลขที่อ้างอิง'
+                                            },
+                                            Product: {
+                                                title: 'สินค้า'
+                                            },
+                                            WorkingDate: {
+                                                title: 'วันที่ซ่อม'
+                                            },
+                                            Status: {
+                                                title: 'สถานะ'
+                                            },
+                                            ClosingDate: {
+                                                title: 'วันที่ปิดงาน'
+                                            }
+                                        }
+                                    }, function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                        });
+                        //Return image to show on the person row
+                        return $img;
+                    }
+                }
+            },
+            formCreated: function (event, data) {
+                //not emplement yet
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+                //$('#LoadRecordsButton').click();
+            }
+        });
+
+        //Re-load records when user click 'load records' button.
+        $('#LoadRecordsButton').click(function (e) {
+            e.preventDefault();
+            $('#tbLists').jtable('load', {
+                jtSearching: $('#jtSearching').val()
+            });
+        });
+
+        //Load all records when page is first shown
+        $('#LoadRecordsButton').click();
+    }
+</script>

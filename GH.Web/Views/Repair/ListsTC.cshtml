@@ -1,0 +1,591 @@
+﻿<div id="block-tables" class="block">
+<div class="content">
+<div class="inner">
+<div class="navButton">
+    <form>
+        <input type="text" id="jtSearching" name="jtSearching" placeholder="....." class="textBoxStyle" />
+        <button type="submit" id="LoadRecordsButton" class="buttonStyle">ค้นหา</button>
+        <div style="float:right;padding:5px; display:inline-table ">
+            @Html.DropDownList("jtStatus", (SelectList)ViewBag.WorkingStatus, "--สถานะ--")
+        </div>
+     </form>
+</div>
+  
+<div id="tbLists">
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#jtStatus').change(function(){
+            LoadData();
+        });
+
+        //ViewBag.ClientName is set to a random name in the Index action.
+        var myClientName = '@ViewBag.ClientName';
+       
+        $(function () {
+            $('#jtSearching').autocomplete({
+                source: '@Url.Action("Search")',
+                minLength: 1,
+                select: function (event, ui) { LoadData();}
+            });
+            LoadData();
+        });
+
+        function LoadData(){
+            $('#tbLists').jtable({
+                title: 'รายการแจ้งซ่อม',
+                //saveUserPreferences: false, 
+                paging: true,
+                pageSize: 10,
+                sorting: true,
+                defaultSorting: '',
+                actions: {
+                    listAction: '@Url.Action("Lists")',
+                    //deleteAction: '@Url.Action("Delete")',
+                    updateAction: '@Url.Action("EditTCRepair")'
+                },
+                fields: {
+                    kRepairId: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    IsComplete: {
+                        type:'hidden'
+                    },
+                    Approve: {
+                        title: 'QC',
+                        sorting: false,
+                        create: false,
+                        edit: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            var qc = data.record.IsQCPass;
+                            var $img = $('<img class="child-opener-image" src="/Images/10.png" title="ยังไม่ผ่านการตรวจสอบ"  />');
+                            
+                            if(qc){
+                                $img = $('<img class="child-opener-image" src="/Images/9.png" title="ผ่านการตรวจสอบแล้ว"  />');
+                            }
+                            
+                            return $img;
+                        }
+                    },
+                    sRepairNo: {
+                        title: 'เลขอ้างอิง',
+                        create: false,
+                        edit: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            var $img = $('<a href="Repair/Edit/'+ data.record.kRepairId +'">'+ data.record.sRepairNo +'</a>');
+                            return $img;
+                        }
+                    },
+                    kProductId: {
+                        type: 'hidden'
+                    },
+                    vProductName: {
+                        title: 'สินค้า',
+                        create: false,
+                        edit: false
+                    },
+                    kCustomerId: {
+                        type: 'hidden'
+                    },
+                    vCustomerName: {
+                        title: 'ลูกค้า',
+                        create: false,
+                        edit: false
+                    },
+                    kStaffId: {
+                        title: 'ส่งต่อผู้ดูแล',
+                        list: false,
+                         create: false,
+                        edit: false,
+                        options: '@Url.Action("GetStaffByPosition", "Home")'
+                    },
+                    kWorkingStatusId: {
+                        title: 'สถานะ',
+                        list: false,
+                        options: '@Url.Action("GetWorkingStatusByPosition","Home")'
+                    },
+                    vWorkingStatus: {
+                        title: 'สถานะ',
+                        create: false,
+                        edit: false
+                    },
+                    vStaffName: {
+                        title: 'ผู้ดูแล',
+                        create: false,
+                        edit: false
+                    },
+                    vDateAdd: {
+                        title: 'วันรับสินค้า',
+                        create: false,
+                        edit: false
+                    },
+                    vDueDate: {
+                        title: 'วันนัดรับสินค้า',
+                        create: false,
+                        edit: false
+                    },
+                    vCloseStatusId: {
+                        title: '',
+                        list: false,
+                        create: false,
+                        edit: false,
+                        type: 'radiobutton',
+                        options: { '1': 'ปกติ', '2': 'ตีกลับ', '3': 'ยกเลิก', '4': 'มีประกัน', '5': 'ฟรี', '6': 'มีค่าบริการ', '7': 'Hp On Site' }
+                    },
+                    IsNoCredit:{
+                        title: 'ลูกค้าจ่ายสด',
+                        list: false,
+                        create: false,
+                        edit: false,
+                        type: 'checkbox',
+                        values: { 'false': 'ไม่ใช่', 'true': 'ใช่' },
+                        defaultValue: 'false'
+                    },
+                    IsQCPass:{
+                        title: 'ตรวจสอบคุณภาพ',
+                        list: false,
+                        create: false,
+                        edit: false,
+                        type: 'checkbox',
+                        values: { 'false': 'ไม่ผ่าน', 'true': 'ผ่าน' },
+                        defaultValue: 'false'
+                    },
+                    IsCustomerRecieved:{
+                        title: 'ลูกค้ารับสินค้า',
+                        list: false,
+                        create: false,
+                        edit: false,
+                        type: 'checkbox',
+                        values: { 'false': 'ไม่ใช่', 'true': 'ใช่' },
+                        defaultValue: 'false'
+                    },
+                    kCloseStaffId: {
+                        title: '',
+                        list: false,
+                        create: false,
+                        edit: false,
+                        options: '@Url.Action("GetCloseStatusByPosition", "Home")'
+                    },
+                    RepairStatus: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            var $img = $('<img class="child-opener-image" src="/Images/hourglass.png" title="ประวัติสถานะการซ่อม/เครม" />');
+                            
+                            if (data.record.IsComplete == true) {
+                                $img = $('<img class="child-opener-image" src="/Images/tick.png" title="ประวัติสถานะการซ่อม/เครม" />');
+                            }
+                           
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: '[' + data.record.vRepairNo + ']  ' + 'หัวหน้างาน '+ data.record.vOwner,
+                                        actions: {
+                                            listAction: '@Url.Action("GetRepairStatus", "Repair")?id=' + data.record.kRepairId
+                                        },
+                                        fields: {
+                                            vStaffName: {
+                                                title: 'ผู้ดูแล'
+                                            },
+                                            vWorkingStatus: {
+                                                title: 'สถานะ'
+                                            },
+                                            vWorkingDate: {
+                                                title: 'วันที่'
+                                            },
+                                            vWorkingTime: {
+                                                title: 'เวลา'
+                                            }
+                                        }
+                                    }, 
+                                    function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    },
+                    ChildData: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            var $img = $('<img class="child-opener-image" src="/Images/phone.png" title="ข้อมูลอื่นๆ" />');
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                        $img.closest('tr'),
+                                        {
+                                            //title: '[' + data.record.vRepairNo + ']  ' + '<a href="Repair/Edit/'+ data.record.kRepairId +'">แก้ไขรายการซ่อม</a>',
+                                            title: '[' + data.record.vRepairNo + ']  ' + 'หัวหน้างาน '+ data.record.vOwner,
+                                            actions: {
+                                                listAction: '@Url.Action("GetRepair", "Repair")?id=' + data.record.kRepairId,
+                                                /*updateAction: '@Url.Action("EditRepair", "Repair")'*/
+                                            },
+                                            fields: {
+                                                kRepairId: {
+                                                    type: 'hidden',
+                                                    defaultValue: data.record.kRepairId
+                                                },
+                                                kCustomerId: {
+                                                    key: true,
+                                                    list: false
+                                                },
+                                                vCustomerDescription: {
+                                                    title: 'ข้อมูลลูกค้า'
+                                                },
+                                                kProductId: {
+                                                    key: true,
+                                                    list: false
+                                                },
+                                                vProductDescription: {
+                                                    title: 'ข้อมูลสินค้า'
+                                                },
+                                                sProductAccessories: {
+                                                    title: 'อุปกรณ์ที่นำมาด้วย'
+                                                },
+                                                sNote: {
+                                                    title: 'อื่นๆ'
+                                                },
+                                                vFileUploads:{
+                                                    title: 'รูป'
+                                                }
+                                            }
+                                        }, function (data) { //opened handler
+                                            data.childTable.jtable('load');
+                                        });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    },
+                    RepairCause: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            var $img = $('<img class="child-opener-image" src="/Images/36.png" title="บันทึกการซ่อม/เครม" />');
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: 'บันทึกการซ่อม/เครม <a href="@Url.Action("Summary")?id='+ data.record.kRepairId +'"><img class="child-opener-image" src="/Images/12.png" title="พิมพ์ใบรับคืนสินค้า" /></a>',
+                                        actions: {
+                                            listAction: '@Url.Action("GetRepairCause", "Repair")?id=' + data.record.kRepairId,
+                                            deleteAction: '@Url.Action("DeleteRepairCause", "Repair")',
+                                            updateAction: '@Url.Action("EditRepairCause", "Repair")',
+                                            createAction: '@Url.Action("CreateRepairCause", "Repair")'
+                                        },
+                                        fields: {
+                                            kRepairId: {
+                                                type: 'hidden',
+                                                defaultValue: data.record.kRepairId
+                                            },
+                                            kRepairCauseId: {
+                                                key: true,
+                                                create: false,
+                                                edit: false,
+                                                list: false
+                                            },
+                                            vStaffName: {
+                                                title: 'ผู้บันทึก',
+                                                edit: false,
+                                                create: false
+                                            },
+                                            sDescription: {
+                                                title: 'การซ่อม',
+                                                inputClass: 'validate[required[maxSize[100]]]',
+                                                input: function (data) {
+                                                    
+                                                    var $img = $('<textarea name="sDescription" value="" />');
+                                                    if (data.record) {
+                                                        $img = $('<textarea name="sDescription">' + data.value + '</textarea>');
+                                                    }
+                                                    $img.autocomplete({
+                                                        source: '@Url.Action("Search2Prefix", "Cause")',
+                                                        minLength: 1,
+                                                        select: function (event, ui) {
+                                                            $img.val(ui.item.description);
+                                                        }
+                                                    });
+                                                    return $img;
+                                                }
+                                            },
+                                            dPrice: {
+                                                title: 'ค่าบริการ',
+                                                inputClass: 'validate[custom[number]]'
+                                            },
+                                            vWorkingDate: {
+                                                title: 'วันที่',
+                                                edit: false,
+                                                create: false
+                                            },
+                                            vWorkingTime: {
+                                                title: 'เวลา',
+                                                edit: false,
+                                                create: false
+                                            }
+                                        }
+                                    }, 
+                                    function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    },
+                    RepairCauseEstimate: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            var $img = $('<img class="child-opener-image" src="/Images/41.png" title="บันทึกประเมินการซ่อม/เครม" />');
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {                                           
+                                        title: 'บันทึกประเมินการซ่อม/เครม <a href="@Url.Action("RepairSummary")?id='+ data.record.kRepairId +'"><img class="child-opener-image" src="/Images/printer_error.png" title="พิมพ์ใบรับซ่อมสินค้า" /></a>',
+                                        actions: {
+                                            listAction: '@Url.Action("GetRepairCauseEstimate", "Repair")?id=' + data.record.kRepairId,
+                                            deleteAction: '@Url.Action("DeleteRepairCauseEstimate", "Repair")',
+                                            updateAction: '@Url.Action("EditRepairCauseEstimate", "Repair")',
+                                            createAction: '@Url.Action("CreateRepairCauseEstimate", "Repair")'
+                                        },
+                                        fields: {
+                                            kRepairId: {
+                                                type: 'hidden',
+                                                defaultValue: data.record.kRepairId
+                                            },
+                                            kRepairCauseEstimateId: {
+                                                key: true,
+                                                create: false,
+                                                edit: false,
+                                                list: false
+                                            },
+                                            vStaffName: {
+                                                title: 'ผู้บันทึก',
+                                                edit: false,
+                                                create: false
+                                            },
+                                            sDescription: {
+                                                title: 'การซ่อม',
+                                                inputClass: 'validate[required[maxSize[100]]]',
+                                                input: function (data) {
+                                                    
+                                                    var $img = $('<textarea name="sDescription" value="" />');
+                                                    if (data.record) {
+                                                        $img = $('<textarea name="sDescription">' + data.value + '</textarea>');
+                                                    }
+                                                    $img.autocomplete({
+                                                        source: '@Url.Action("Search2Prefix", "Cause")',
+                                                        minLength: 1,
+                                                        select: function (event, ui) {
+                                                            $img.val(ui.item.description);
+                                                        }
+                                                    });
+                                                    return $img;
+                                                }
+                                            },
+                                            dPrice: {
+                                                title: 'ประเมินค่าบริการ',
+                                                inputClass: 'validate[custom[number]]'
+                                            },
+                                            vWorkingDate: {
+                                                title: 'วันที่',
+                                                edit: false,
+                                                create: false
+                                            },
+                                            vWorkingTime: {
+                                                title: 'เวลา',
+                                                edit: false,
+                                                create: false
+                                            }
+                                        }
+                                    }, 
+                                    function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    },
+                    Reminds: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            var $img = $('<img class="child-opener-image" src="/Images/note.png" title="บันทึกการแจ้งเตือนลูกค้า" />');
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: 'บันทึกการแจ้งเตือนลูกค้า',
+                                        actions: {
+                                            listAction: '@Url.Action("GetRemind", "Repair")?id=' + data.record.kRepairId,
+                                            //deleteAction: '@Url.Action("DeleteRemind", "Repair")',
+                                            //updateAction: '@Url.Action("EditRemind", "Repair")',
+                                            //createAction: '@Url.Action("CreateRemind", "Repair")'
+                                        },
+                                        fields: {
+                                            kRepairId: {
+                                                type: 'hidden',
+                                                defaultValue: data.record.kRepairId
+                                            },
+                                            kStaffId: {
+                                                type: 'hidden',
+                                                defaultValue: data.record.kStaffId
+                                            },
+                                            kRemindId: {
+                                                key: true,
+                                                create: false,
+                                                edit: false,
+                                                list: false
+                                            },
+                                            vStaffName: {
+                                                title: 'ผู้บันทึก',
+                                                edit: false,
+                                                create: false
+                                            },
+                                            sNote: {
+                                                title: 'แจ้งลูกค้ารับสินค้า',
+                                                type: 'textarea',
+                                                inputClass: 'validate[required[maxSize[100]]]'
+                                            },
+                                            vWorkingDate: {
+                                                title: 'วันที่',
+                                                edit: false,
+                                                create: false
+                                            },
+                                            vWorkingTime: {
+                                                title: 'เวลา',
+                                                edit: false,
+                                                create: false
+                                            }
+                                        }
+                                    }, function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    }
+                },
+                formCreated: function (event, data) {
+                    //not emplement yet
+                },
+                formSubmitting: function (event, data) {
+                    return data.form.validationEngine('validate');
+                },
+                formClosed: function (event, data) {
+                    data.form.validationEngine('hide');
+                    data.form.validationEngine('detach');
+                    //$('#LoadRecordsButton').click();
+                }
+            });
+
+            //Re-load records when user click 'load records' button.
+            $('#LoadRecordsButton').click(function (e) {
+                e.preventDefault();
+                $('#tbLists').jtable('load', {
+                    jtSearching: $('#jtSearching').val(),
+                    jtStatus: $("#jtStatus option:selected").val()
+                    //jtPageSize: $("#jtPageSize option:selected").val()
+                });
+            });
+
+            //Load all records when page is first shown
+            $('#LoadRecordsButton').click();
+        }
+
+        //Create SignalR object to get communicate with server
+        var realTimeHub = $.connection.realTimeJTableDemoHub;
+
+        //Define a function to get 'record created' events
+        realTimeHub.RecordCreated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#tbLists').jtable('addRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+            loadNotes(true);
+
+            //writeEvent(clientName + ' ' + record.vMessage, 'event-created');
+        };
+
+        //Define a function to get 'record updated' events
+        realTimeHub.RecordUpdated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#tbLists').jtable('updateRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+            loadNotes(true);
+
+            //writeEvent(clientName + ' ' + record.vMessage, 'event-updated');
+        };
+
+        //Define a function to get 'record deleted' events
+        realTimeHub.RecordDeleted = function (clientName, recordId) {
+            if (clientName != myClientName) {
+                $('#tbLists').jtable('deleteRecord', {
+                    key: recordId,
+                    clientOnly: true
+                });
+            }
+            loadNotes(true);
+
+            //writeEvent(clientName + ' <b>ลบ</b> ' + recordId, 'event-deleted');
+        };
+
+        //Define a function to get 'chat messages'
+        realTimeHub.GetMessage = function (clientName, message) {
+            writeEvent('<b>' + clientName + '</b> sent: ' + message, 'event-message');
+        };
+
+        $('#Message').keydown(function (e) {
+            if (e.which == 13) { //Enter
+                e.preventDefault();
+                realTimeHub.sendMessage(myClientName, $('#Message').val());
+                $('#Message').val('');
+            }
+        });
+
+        // Start the connection with server
+        $.connection.hub.start();
+
+        //A function to write events to the page
+        function writeEvent(eventLog, logClass) {
+            var now = new Date();
+            var nowStr = now.getHours() + ':' + now.getMinutes();
+            $('#EventsList').prepend('<ul class="' + logClass + '"><b>' + nowStr + '</b></a>: ' + eventLog + '</ul><hr/>');
+        }
+    });
+
+</script>
+</div>
+</div>
+</div>

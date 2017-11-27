@@ -1,0 +1,23 @@
+﻿@model GH.Web.Models.BookingClaimViewModel
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#Product_ProductType_sDescription').autocomplete({
+                source: '@Url.Action("Search2", "ProductType")',
+                minLength: 1,
+                select: function (event, ui) {
+                    $('#Product_ProductType_sDescription').val(ui.item.label);
+                    $('#Product_kProductTypeId').val(ui.item.id);
+                    return false;
+                }
+            });
+        });
+    });
+</script>
+
+@Html.HiddenFor(model => model.Product.kProductTypeId)
+@*@Html.TextBoxFor(model => model.Product.kProductTypeId, new { @Value = Guid.NewGuid(), @Style = "display:" })
+*@
+@Html.TextBoxFor(model => model.Product.ProductType.sDescription, new { @class = "textBoxStyle validate[required]" })
+
+<img src="@Url.Content("~/Images/Information.gif")" />

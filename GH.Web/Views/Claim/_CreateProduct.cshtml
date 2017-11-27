@@ -1,0 +1,165 @@
+﻿@model GH.Web.Models.BookingClaimViewModel
+<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#jtSearchingProduct').autocomplete({
+                source: '@Url.Action("Search2", "Product")',
+                minLength: 1,
+                select: function (event, ui) {
+                    ProductClear();
+
+                    $('#Claim_kProductId').val(ui.item.kProductId);
+                    $('#Product_sProductName').val(ui.item.sProductName);
+                    $('#Product_sProductModel').val(ui.item.sProductModel);
+                    $('#Product_kProductTypeId').val(ui.item.kProductTypeId);
+                    $('#Product_ProductType_sDescription').val(ui.item.sProductTypeDescription);
+                    $('#Product_kBrandId').val(ui.item.kBrandId);
+                    $('#Product_Brand_sBrandName').val(ui.item.sBrandDescription);
+                    return false;
+                }
+            });
+        });
+    });
+
+    $().ready(function () {
+        $("#jobIDSearching").autocomplete({
+            source: '@Url.Action("SearchJobIDForClaim", "Product")',
+            minLength: 1,
+            select: function (event, ui) {
+                ProductClear();
+
+                $('#Claim_kProductId').val(ui.item.kProductId);
+                $('#Claim_sRepairNo').val(ui.item.sRepairNo);
+                $('#Claim_sSerial').val(ui.item.sSerial);
+                $('#Claim_dtInsuranceExpire').val(ui.item.dtInsuranceExpire);
+                
+                $('#Product_sProductName').val(ui.item.sProductName);
+                $('#Product_sProductModel').val(ui.item.sProductModel);
+
+                $('#Product_kProductTypeId').val(ui.item.kProductTypeId);
+                $('#Product_kBrandId').val(ui.item.kBrandId);
+                
+                //$('#Product_kProductTypeId').val(ui.item.kProductTypeId);
+                //$('#Product_ProductType_sDescription').val(ui.item.sProductTypeDescription);
+                //$('#Product_kBrandId').val(ui.item.kBrandId);
+                //$('#Product_Brand_sBrandName').val(ui.item.sBrandDescription);
+                return false;
+            }
+        });
+    });
+   
+    function ProductClear() {
+        $('#jobIDSearching').val('');
+        $('#jtSearchingProduct').val('');
+        $('#Claim_kProductId').val('');
+        $('#Claim_sRepairNo').val('');
+        $('#Claim_sSerial').val('');
+        $('#Claim_dtInsuranceExpire').val('');
+        $('#Product_sProductName').val('');
+        $('#Product_sProductModel').val('');
+        $('#Product_kProductTypeId').val('');
+        $('#Product_ProductType_sDescription').val('');
+        $('#Product_kBrandId').val('');
+        $('#Product_Brand_sBrandName').val('');
+    }
+
+</script>
+
+<script type="text/javascript">
+//	$(function () {
+//	    $("#Claim_dtInsuranceExpire").datepicker();
+//
+    //	});
+
+    $(function () {
+        var d = new Date();
+        var toDay = (d.getMonth() + 1) + '/' + d.getDate() + '/' + (d.getFullYear() + 543);
+
+        $("#Claim_dtInsuranceExpire").datepicker({ dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true, isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        });
+    });
+</script>
+
+
+<table cellspacing="20">
+    <tr>
+        <td>
+            <div class="group wat-cf">
+                <input type="text" id="jobIDSearching" name="jobIDSearching" placeholder="ค้นหาจาก Job ID" class="textBoxStyle" />
+            </div>
+        </td>
+        <td>
+            <input type="text" id="jtSearchingProduct" name="jtSearchingProduct" placeholder="ค้นหา... สินค้า" class="textBoxStyle" style="display:none" />
+            <button type="submit" id="LoadRecordsButton" class="buttonStyle" style="display:none">ค้นหา</button>
+            @Html.TextBoxFor(model => model.Claim.kProductId, new { @Style = "display:none" })
+            @Html.TextBoxFor(model => model.Claim.sRepairNo, new { @Style = "display:none" })
+            <input type="button" class="buttonStyle" onclick="ProductClear();" value="Clear" />
+        </td>
+    </tr>
+    <tr style="vertical-align:top;">
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.kProductTypeId, new { @class = "label" })
+	            </div>
+	            <div class="right">
+                @Html.DropDownListFor(m => m.Product.kProductTypeId, new SelectList(ViewBag.ProductTypes, "kProductTypeId", "sDescription"), "-- เลือก --", new { @class = "SelectStyle validate[required]" })
+                    @* @Html.Partial("_ProductType")*@
+                </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.kBrandId, new { @class = "label" })
+	            </div>
+	            <div class="right">
+                    @Html.DropDownListFor(m => m.Product.kBrandId, new SelectList(ViewBag.Brands, "kBrandId", "sBrandName"), "-- เลือก --", new { @class = "SelectStyle validate[required]" })
+                    @*@Html.Partial("_Brand")*@
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Claim.sSerial, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Claim.sSerial, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>		
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Claim.dtInsuranceExpire, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Claim.dtInsuranceExpire, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>		
+        </td>
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.sProductName, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Product.sProductName, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.sProductModel, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Product.sProductModel, new { @class = "textBoxStyle" })
+	            </div>
+            </div>	
+          
+
+        </td>
+    </tr>
+</table>
+
+
+
+			

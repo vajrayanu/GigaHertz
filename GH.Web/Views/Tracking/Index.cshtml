@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+
+<script src="@Url.Content("~/Scripts/jquery-1.7.min.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/base.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/themes/default/style.css")" rel="stylesheet" type="text/css" />
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  
+</head>
+
+<style>
+body {
+    background: url("../default/images/bgd.jpg") repeat scroll 0 0 #C4C4C4;
+    color: #282727;
+    font-family: "MuseoSans500",helvetica,arial,sans-serif;
+    font-size:12px;
+    padding:5px;
+  
+}
+#showdata
+{
+	padding-left:15px;
+}
+.dv
+{
+	padding:20px;	
+}
+.dvMsg
+{
+	 padding:20px;	
+	 font-size:1em;
+	 color:#000000;
+}
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#loading").hide();
+        $('#getdata-button').live('click', function () {
+            ShowData();
+        });
+    });
+
+    function ShowData() {
+        $("#loading").show();
+
+        setTimeout(function () {
+            $.ajax({
+                url: "/Tracking/ProductTracking?term=" + $('#jtSearchingProduct').val(),
+                type: "GET",
+                async: false,
+                cache: false,
+                beforeSend: function () {
+                    $("#loading").show()
+                },
+                complete: function () {
+                    $("#loading").hide();
+                },
+                success: function (msg) {
+                    $('#showdata').html("<b>" + msg.result + "</b>");
+                }
+            });
+        }, 1000); //wait 1 sec
+    }
+</script>
+<body>
+<div id="box">
+    <div class="block" id="block-login">
+        <h2>เช็คสถานะงานซ่อม/Check repair status</h2>
+        <div class="content login">
+        <div class="dv">
+
+        <div class="navButton">
+            <input type="text" id="jtSearchingProduct" name="jtSearchingProduct" placeholder="หมายเลขอ้างอิง..." class="textBoxStyle" />
+            <button type="button" id="getdata-button" class="buttonStyle" style="display:">Search</button>
+            <div id="loading" style="padding-top:5px;position:relative; text-align:left;z-index:1">  
+                <img src="../Images/loading.gif" alt="Processing" />
+            </div>
+        </div>
+        <div id="showdata"></div>
+        </div>
+        </div>
+        <div class="dvMsg">
+        <span>*กรุณากรอกหมายเลขตัวรับงานเพื่อเช็คสถานะงานซ่อมของท่าน ตัวอย่าง SV5510001</span><br />
+        <spab>*Please enter the number to check the status of your repair. EX SV5510001</spab>
+        </div>
+
+        <div style="padding-left:170px">
+            <img src="../Images/group2.png" alt="Counter" />
+            @Html.Encode("เยี่ยมชม "+ @ViewBag.Counter)
+        </div>
+        <br />
+    </div>
+</div>
+</body>
+</html>

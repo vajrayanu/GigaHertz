@@ -1,0 +1,15 @@
+﻿<div id="user-navigation">
+    @if (Request.IsAuthenticated)
+    {
+        <ul class="wat-cf">
+            <li>ยินดีต้อนรับ @User.Identity.Name</li>
+            
+            @if (Roles.IsUserInRole("Admin") || Roles.IsUserInRole("SuperUser"))
+            {
+                @*<li class="@ViewBag.Setting">@Html.ActionLink("ปรับปรุงฐานข้อมูล","Index","AppSetting")</li>*@
+            }
+            <li class="@ViewBag.Setting">@Html.ActionLink("ปรับปรุงฐานข้อมูล","Index","AppSetting")</li>
+            <li>@Html.ActionLink("ออกจากระบบ","LogOff","Account")</li>
+        </ul>
+    }
+</div>

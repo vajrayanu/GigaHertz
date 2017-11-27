@@ -1,0 +1,25 @@
+﻿@model GH.Web.Models.BookingClaimViewModel
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#Product_Brand_sBrandName').autocomplete({
+                source: '@Url.Action("Search2", "Brand")',
+                minLength: 1,
+                select: function (event, ui) {
+                    $('#Product_Brand_sBrandName').val(ui.item.label);
+                    $('#Product_kBrandId').val(ui.item.id);
+                    return false;
+                }
+            });
+        });
+    });
+</script>
+
+@Html.HiddenFor(model => model.Product.kBrandId)
+
+
+@*@Html.TextBoxFor(model => model.Product.kBrandId, new { @Value = Guid.NewGuid(), @Style = "display:" })
+*@
+@Html.TextBoxFor(model => model.Product.Brand.sBrandName, new { @class = "textBoxStyle validate[required]" })
+
+<img src="@Url.Content("~/Images/Information.gif")" />

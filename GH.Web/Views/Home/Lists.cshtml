@@ -1,0 +1,111 @@
+﻿<div id="StudentTableContainer">
+</div>
+<div id="MessagingDiv" class="rectangular-area">
+    Enter a message to send to all users:
+    <input type="text" id="Message" style="width: 300px;" maxlength="128" />
+</div>
+<div id="TableUpdates" class="rectangular-area">
+    <h3>
+        Latest received events (You are <span id="MyClientName">@ViewBag.ClientName</span>):
+    </h3>
+    <ul id="EventsList">
+    </ul>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //ViewBag.ClientName is set to a random name in the Index action.
+        var myClientName = '@ViewBag.ClientName';
+
+        //Initialize jTable
+        $('#StudentTableContainer').jtable({
+            title: 'Student List',
+            actions: {
+                listAction: '@Url.Action("Lists")',
+                deleteAction: '@Url.Action("Delete")',
+                updateAction: '@Url.Action("Edit")',
+                createAction: '@Url.Action("Create")'
+            },
+            fields: {
+                kBrandId: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                sBrandName: {
+                    title: 'Name',
+                    inputClass: 'validate[required]',
+                    width: '10%'
+                }
+            }
+        });
+
+        //Load student list from server
+        $('#StudentTableContainer').jtable('load');
+
+        //Create SignalR object to get communicate with server
+        var realTimeHub = $.connection.realTimeJTableDemoHub;
+
+        //Define a function to get 'record created' events
+        realTimeHub.RecordCreated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#StudentTableContainer').jtable('addRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' has <b>created</b> a new record with id = ' + record.StudentId, 'event-created');
+        };
+
+        //Define a function to get 'record updated' events
+        realTimeHub.RecordUpdated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#StudentTableContainer').jtable('updateRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' has <b>updated</b> a new record with id = ' + record.StudentId, 'event-updated');
+        };
+
+        //Define a function to get 'record deleted' events
+        realTimeHub.RecordDeleted = function (clientName, recordId) {
+            if (clientName != myClientName) {
+                $('#StudentTableContainer').jtable('deleteRecord', {
+                    key: recordId,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' has <b>removed</b> a record with id = ' + recordId, 'event-deleted');
+        };
+
+        //Define a function to get 'chat messages'
+        realTimeHub.GetMessage = function (clientName, message) {
+            writeEvent('<b>' + clientName + '</b> has sent a message: ' + message, 'event-message');
+        };
+
+        $('#Message').keydown(function (e) {
+            if (e.which == 13) { //Enter
+                e.preventDefault();
+                realTimeHub.sendMessage(myClientName, $('#Message').val());
+                $('#Message').val('');
+            }
+        });
+
+        // Start the connection with server
+        $.connection.hub.start();
+
+        //A function to write events to the page
+        function writeEvent(eventLog, logClass) {
+            var now = new Date();
+            var nowStr = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+            $('#EventsList').prepend('<li class="' + logClass + '"><b>' + nowStr + '</b>: ' + eventLog + '.</li>');
+        }
+    });
+
+</script>

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">  
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+	<head> 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Adding a Timepicker to jQuery UI Datepicker</title> 
+		<meta name="Description" content="jQuery Timepicker Addon.  Add a timepicker to your jQuery UI Datepicker.  With options to show only time, format time, and much more." />
+		<meta name="Keywords" content="jQuery, UI, datepicker, timepicker, datetime, time, format" />
+
+		 <script type="text/javascript" src="../Scripts/datepicker/DateTimePicker.js"></script>
+
+		@*<link rel="stylesheet" media="all" type="text/css" href="http://code.jquery.com/ui/1.8.21/themes/ui-lightness/jquery-ui.css" />*@
+	@*	<link rel="stylesheet" media="all" type="text/css" href="../Scripts/datepicker/jquery-ui-timepicker-addon.css" />*@
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+		@*<script type="text/javascript" src="../Scripts/datepicker/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="../Scripts/datepicker/jquery-ui-sliderAccess.js"></script>*@
+		 <script type="text/javascript">
+		     $(function () {
+		         $("#datepicker").datepicker();
+		         $("#datepicker2").datetimepicker();
+		     });
+     </script>
+	</head> 
+	  <body>
+    <input type="text" name="datepicker" id="datepicker" />
+     <input type="text" name="datepicker2" id="datepicker2" />
+  </body>
+</html>

@@ -1,0 +1,108 @@
+﻿@model GH.Web.Models.BookingRepairViewModel
+
+@{
+    ViewBag.Title = "Repair";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th.js")"></script>
+<script src="@Url.Content("~/Scripts/datepicker/jquery-ui-1.8.10.offset.datepicker.min.js")" type="text/javascript"></script>
+<script type="text/javascript" src=""@Url.Content("~/Scripts/autocomplete/jquery.autocomplete.js")"></script>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<script src="@Url.Content("~/Scripts/smartwizard/jquery.smartWizard-2.0.min.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Scripts/smartwizard/smart_wizard.css")" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // set valis submit
+        var isSubmit = true;
+
+        // Smart Wizard         
+        $('#wizard').smartWizard({
+            onLeaveStep: leaveAStepCallback,
+            onFinish: onFinishCallback
+        });
+
+        function leaveAStepCallback(obj) {
+            var isStepValid = true;
+
+            isStepValid = $('#form').validationEngine('validate');
+
+            var step_num = obj.attr('rel');
+
+            if (step_num == 1) {
+                //add customer
+            }
+            else if (step_num == 2) {
+                //add product
+                isSubmit = true;
+            }
+
+            return isStepValid;
+        }
+
+        function onFinishCallback() {
+            if (isSubmit) {
+                isSubmit = false;
+                $.post("/Repair/Edit", $("form").serialize(), function (r) {
+                    window.location.href = '@Url.Action("Index","Repair")';
+                });
+            }
+        }
+
+        // Your Step validation logic
+        function validateSteps(stepnumber) {
+            var isStepValid = true;
+            // validate step 1
+            if (stepnumber == 1) {
+                // Your step validation logic
+                // set isStepValid = false if has errors
+            }
+        }
+        function validateAllSteps() {
+            var isStepValid = true;
+            // all step validation logic     
+            return isStepValid;
+        }
+    });
+</script>
+
+
+@using (Html.BeginForm("Create", "Repair", FormMethod.Post, new { @id = "form" }))
+{
+
+    <table align="center" border="0" cellpadding="0" cellspacing="0">
+    <tr><td> 
+        <!-- Smart Wizard -->
+  	    <div id="wizard" class="swMain">
+  	        <ul>
+  		        <li><a href="#step-1">
+                <label class="stepNumber">1</label>
+                <span class="stepDesc">
+                    Step 1<br />
+                    <small>Step 1: ข้อมูลลูกค้า</small>
+                </span>
+            </a></li>
+  		        <li><a href="#step-2">
+                <label class="stepNumber">2</label>
+                <span class="stepDesc">
+                    Step 2<br />
+                    <small>Step 2: ข้อมูลสินค้า</small>
+                </span>
+            </a></li>
+  	        </ul>
+  	        <div id="step-1">	
+                 <p>@Html.Partial("_CreateCustomer",Model)</p>
+            </div>
+  		    <div id="step-2">
+                <p>@Html.Partial("_EditProduct",Model)</p>       
+            </div>                      
+  		   
+  		    </div>
+        <!-- End SmartWizard Content -->  		
+ 		
+    </td></tr>
+    </table>   
+
+}

@@ -1,0 +1,120 @@
+﻿<script src="@Url.Content("~/Scripts/jquery-1.6.2.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Scripts/validationEngine/validationEngine.jquery.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine-en.js")"></script>
+<script>
+    $(document).ready(function () {
+        $("#formValidation").validationEngine('attach');
+    });
+</script>
+
+
+@model GH.DAL.Model.Customer
+<div id="block-create" class="block">
+    <div class="content">
+        <h2 class="title">
+            validation</h2>
+        <div class="inner">
+@using (Html.BeginForm("Validation", "Home", FormMethod.Post, new { @id = "formValidation", @class = "form" })) 
+{
+    <div class="flash">
+         <p>@Html.ValidationSummary(true,string.Empty, new { @class = "message error" })</p>
+    </div>
+
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sCustomerName, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sCustomerName, new { @class = "validate[required]" })
+				@Html.ValidationMessageFor(model => model.sCustomerName)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sAddress1, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sAddress1, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sAddress1)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sCity, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sCity, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sCity)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sZip, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sZip, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sZip)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sPhone, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sPhone, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sPhone)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sMobile, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sMobile, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sMobile)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sFax, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sFax, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sFax)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sEmailAddress, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sEmailAddress, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sEmailAddress)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group navform wat-cf">
+		    <div class="right">
+			    <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick.png")" alt="Save" />
+				Save
+				</button>
+				<span class="text_button_padding">or</span>
+				@Html.ActionLink("Cancel", "Index", null, new { @class = "text_button_padding link_button" })
+			</div>
+		</div>
+}
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

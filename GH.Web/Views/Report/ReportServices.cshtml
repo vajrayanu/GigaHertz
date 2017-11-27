@@ -1,0 +1,256 @@
+﻿@model GH.Web.Models.ReportServicesViewModel
+@using GH.DAL.Helpers;
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th2.js")"></script>
+<script src="@Url.Content("~/Scripts/datepicker/jquery-ui-1.8.10.offset.datepicker.min.js")" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            var d = new Date();
+            var toDay = (d.getMonth() + 1) + '/' + d.getDate() + '/' + (d.getFullYear() + 543);
+
+            $("#DateStart").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+                dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+                monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+                monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+            });
+
+            $("#DateEnd").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+                dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+                monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+                monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+            });
+        });
+
+        ReCalculation();
+    });
+
+    function Print() {
+
+        var printContents = document.getElementById("printContent").innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+
+    function ReCalculation() {
+
+        //Recieved
+        var Received = @Model.Report.Received;
+        var r1 = $("#Report_Received_HasCost").val();
+        var r2 = $("#Report_StockOut").val();
+        var r3 = $("#Report_Received_Ins").val();
+        var r4 = $("#Report_Received_Ins_IsCredit").val();
+        var sumReceived = parseFloat(Received) + parseFloat(r1) + parseFloat(r2) + parseFloat(r3) + parseFloat(r4);
+        $("label[for='Report_Received_Summary']").text(sumReceived);
+
+        //Pay
+        var Pay = parseFloat(@Model.Report.Pay_Claim_IsNoCredit) + parseFloat(@Model.Report.Pay_Claim_IsCredit);
+        var p1 = $("#Report_Widen").val();
+        var p2 = $("#Report_Salary_Service").val();
+        var p3 = $("#Report_Salary_Service_IsCredit").val();
+        var sumPay = parseFloat(Pay) + parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+
+        //Total
+        var sumTotal = parseFloat(sumReceived) - parseFloat(sumPay);
+        $("label[for='Report_TotalSummary']").text(sumTotal);
+
+    }
+</script>
+
+
+
+@using (Html.BeginForm())
+{
+    if (Model.Report != null)
+    {
+        <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DateStart, new { @class = "label" })
+            </td>
+            <td>
+                @Html.LabelFor(model => model.DateEnd, new { @class = "label" })
+            </td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>
+                @Html.TextBox("DateStart", Model.DateStart.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                @Html.TextBox("DateEnd", Model.DateEnd.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                <button type="submit" id="LoadRecordsButton" class="buttonStyle">สร้างรายงาน</button>
+                <button type="button" id="print" class="buttonStyle" onclick="Print();">พิมพ์</button>
+            </td>
+        </tr>
+    </table>   
+   
+        if (Model.Report.Repairs.Count > 0)
+        {
+           <div id="printContent">
+            <style>
+                .tb1 tr td
+                {
+    	            /*border:1px solid #cccccc;#CFCDC9*/
+                    font-size:1.2em;
+                    border: solid 1px #CFCDC9;
+                    border-collapse: collapse;
+                    white-space: nowrap;
+                    /*text-align:right;*/
+                    padding-left:50px;
+                }
+                .tb1 tr td.header
+                {
+    	            font-weight:bold;
+    	            font-size:1.8em;
+    	            text-align:center;
+    	            padding-top:10px;
+                }
+                .tb1 tr td.subheader
+                {
+    	            font-weight:bold;
+    	            font-size:1.2em;
+    	            padding-left:0px;
+                }
+                .tb1 tr td.subheader2
+                {
+    	            font-weight:bold;
+    	            font-size:1.2em;
+    	            padding-left:150px;
+                }
+                .tb1 tr td.tab
+                {
+    	            font-weight:bold;
+    	            font-size:1.8em;
+    	            text-align:center;
+                }
+                .hidetextbox
+                {
+                	background-color:#C0C0C0;
+                }
+            </style>
+            <table class="tb1">
+                <tr>
+                    <td class="header" colspan="2">@ViewBag.ReportHeader</td>
+                </tr>
+                <tr>
+                    <td class="subheader" colspan="2">รายรับ</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("ไม่มีต้นทุน")</td>
+                    <td>@Html.Label(string.Format("{0:0,0}", Model.Report.Received))</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("มีต้นทุน")</td>
+                    <td>@Html.TextBoxFor(m => m.Report.Received_HasCost, new { @onkeyup = "ReCalculation();" })</td>
+                </tr>
+                 <tr>
+                    <td>@Html.Label("สต๊อกนอก")</td>
+                    <td>@Html.TextBoxFor(m => m.Report.StockOut, new { @onkeyup = "ReCalculation();" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("ไม่มีต้นทุน(เชื่อ)")</td>
+                    <td>@Html.Label(string.Format("{0:0,0}", Model.Report.Received_IsCredit))</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("EXPRESS")</td>
+                    <td>@Html.Label(string.Format("{0:0,0}", Model.Report.Received_Express))</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("สดศูนย์")</td>
+                    <td>@Html.TextBoxFor(m => m.Report.Received_Ins, new { @onkeyup = "ReCalculation();" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("เชื่อศูนย์")</td>
+                     <td>@Html.TextBoxFor(m => m.Report.Received_Ins_IsCredit, new { @onkeyup = "ReCalculation();" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("รวม")</td>
+                    <td>@Html.Label("Report_Received_Summary", string.Format("{0:0,0}", Model.Report.Received_Summary))</td>
+                </tr>
+                <tr>
+                    <td class="subheader" colspan="2">รายจ่าย</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("ค่าส่งซ่อม(เงินสด)")</td>
+                    <td>@Html.Label(string.Format("{0:0,0}", Model.Report.Pay_Claim_IsNoCredit))</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("ค่าส่งซ่อม(เงินเชื่อ)")</td>
+                    <td>@Html.Label(string.Format("{0:0,0}", Model.Report.Pay_Claim_IsCredit))</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("เบิกภายใน")</td>
+                    <td>@Html.TextBoxFor(m => m.Report.Widen, new { @onkeyup = "ReCalculation();" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("เงินเดือนแผนกบริการ")</td>
+                    <td>@Html.TextBoxFor(m => m.Report.Salary_Service, new { @onkeyup = "ReCalculation();" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("รายจ่ายแผนกบริการ(จ่ายเชื่อ)")</td>
+                    <td>@Html.TextBoxFor(m => m.Report.Salary_Service_IsCredit, new { @onkeyup = "ReCalculation();" })</td>
+                </tr>
+                 <tr>
+                    <td>@Html.Label("รายรับ-รายจ่ายสุทธิ")</td>
+                    <td>@Html.Label("Report_TotalSummary", string.Format("{0:0,0}", Model.Report.TotalSummary))</td>
+                </tr>
+                <tr>
+                    <td class="subheader2">สรุปผลงานช่างประจำเดือน</td>
+                </tr>
+                @foreach (var item in Model.Report.Staffs)
+                {
+                    <tr>
+                        <td>@Html.Encode(item.sStaffName)</td>
+                        <td>
+                            @Html.Encode(Model.Report.Repairs.Where(m => m.kStaffId == item.kStaffId).ToList().Count)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td class="subheader2">สรุปผลงานหัวหน้าช่างประจำเดือน</td>
+                </tr>
+                @foreach (var item in Model.Report.SuperStaffs)
+                {
+                    <tr>
+                        <td>@Html.Encode(item.sStaffName)</td>
+                        <td>
+                            @Html.Encode(Model.Report.Repairs.Where(m => m.kOwnerId == item.kStaffId).ToList().Count)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td class="subheader2">สรุปผลงาน QC ประจำเดือน</td>
+                </tr>
+                @foreach (var item in Model.Report.QCStaffs)
+                {
+                    <tr>
+                        <td>@Html.Encode(item.sStaffName)</td>
+                        <td>
+                            @Html.Encode(Model.Report.Repairs.Where(m => m.kQCId == item.kStaffId).ToList().Count)
+                        </td>
+                    </tr>
+                }
+            </table>
+            </div>
+        }
+    }
+    else
+    {
+        @Html.Label("ไม่พบข้อมูล!")
+    }
+}
+
+   
+
+  
+

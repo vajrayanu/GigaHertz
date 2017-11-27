@@ -1,0 +1,53 @@
+﻿
+@using GH.DAL.SQLDAL;
+
+<div id="main-navigation">
+    <ul class="wat-cf">
+        @if (Request.IsAuthenticated)
+        {
+            Guid id = new Guid(Membership.GetUser().ProviderUserKey.ToString());
+            var staff = StaffManager.GetById(id);
+            var position = StaffPositionManager.GetById(staff.kStaffPositionId);
+            
+            if (Roles.IsUserInRole("Admin"))
+            {
+                <li class="@ViewBag.RepairCreate">@Html.ActionLink("แจ้งซ่อม", "Create", "Repair")</li>
+                <li class="@ViewBag.ClaimCreate">@Html.ActionLink("แจ้งเคลม", "Create", "Claim")</li>
+                <li class="@ViewBag.RepairList">@Html.ActionLink("รายการซ่อม", "Index", "Repair")</li>
+                <li class="@ViewBag.ClaimList">@Html.ActionLink("รายการเคลม", "Index", "Claim")</li>
+            }
+            else
+            {
+                if (position.sDescription == "ฝ่ายรับสินค้า")
+                {
+                    <li class="@ViewBag.RepairCreate">@Html.ActionLink("แจ้งซ่อม", "Create", "Repair")</li>
+                }
+                if (position.sDescription == "ฝ่ายเครม")
+                {
+                    <li class="@ViewBag.ClaimCreate">@Html.ActionLink("แจ้งเคลม", "Create", "Claim")</li>
+                }
+                
+                <li class="@ViewBag.RepairList">@Html.ActionLink("รายการซ่อม", "Index", "Repair")</li>
+                <li class="@ViewBag.ClaimList">@Html.ActionLink("รายการเคลม", "Index", "Claim")</li>
+            }
+
+            if (Roles.IsUserInRole("Admin") || Roles.IsUserInRole("SuperUser"))
+            {
+                <li class="@ViewBag.ReportList">@Html.ActionLink("รายงาน", "Index", "Report")</li>
+            }
+            if (Roles.IsUserInRole("User"))
+            {
+                if (position.sDescription == "ฝ่ายรับสินค้า")
+                {
+                    <li class="@ViewBag.ReportList">@Html.ActionLink("รายงาน", "Index", "Report")</li>
+                }
+            }
+            <li>@Html.ActionLink("สถานะการซ่อม", "Index", "Tracking")</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Logon", "LogOn", "Account")</li>
+        }
+    </ul>
+</div>
+

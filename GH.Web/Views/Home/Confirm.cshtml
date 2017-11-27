@@ -1,0 +1,20 @@
+﻿@model GH.Web.Models.ViewModel
+
+
+<h2>Confirm</h2>
+
+<fieldset>
+    <legend>
+        <div class="display-label">
+            UserName</div>
+        <div class="display-field">@Model.Customer.sCustomerName</div>
+        <div class="display-label">
+            FirstName</div>
+        <div class="display-field">@Model.Product.sProductName</div>
+    </legend>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

@@ -1,0 +1,37 @@
+﻿@model GH.Web.Models.BookingRepairViewModel
+
+<div id="block-tables" class="block">
+<div class="content">
+<div class="inner">
+@using (Html.BeginForm())
+{
+
+<iframe id="myframe"   width="99%" height="370" style="display:inline" src="@Url.Content("~/Reports/PrintRepairSummary.aspx")"></iframe>
+
+}
+
+<input type="button" value="ยกเลิก" id="back" onclick="javascript:history.back();" class="buttonStyle"  />
+<input type="button" value="พิมพ์ใบรับคืนสินค้า" id="add" onclick="Print();"  class="buttonStyle" />
+
+<script type="text/javascript">
+
+    function Print() {
+
+        var iframe = document.getElementById("myframe");
+
+        var iwindow = iframe.contentWindow;
+
+        var ibody = iwindow.document.body;
+
+        var ffSpan = document.createElement("span");
+
+        ibody.appendChild(ffSpan);
+
+        iwindow.print();
+          
+    }
+</script>
+
+</div>
+</div>
+</div>

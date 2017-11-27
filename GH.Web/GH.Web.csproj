@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4B3E6662-899B-44F3-92D8-DEFA6E0077B5}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GH.DAL</RootNamespace>
+    <AssemblyName>GH.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\WatcharaY\Downloads\crystaldecisions.web.dll\crystaldecisions.web.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="SignalR">
+      <HintPath>..\packages\SignalR.Server.0.3.5\lib\net40\SignalR.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ClaimController.cs" />
+    <Compile Include="Controllers\HandleErrorController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\RemindController.cs" />
+    <Compile Include="Controllers\RepairController.cs" />
+    <Compile Include="Controllers\StaffPositionController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\TrackingController.cs" />
+    <Compile Include="Controllers\UploaderController.cs" />
+    <Compile Include="Helpers\Renders.cs" />
+    <Compile Include="Reports\ClaimSummary.aspx.cs">
+      <DependentUpon>ClaimSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ClaimSummary.aspx.designer.cs">
+      <DependentUpon>ClaimSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\GHDataSet.Designer.cs">
+      <DependentUpon>GHDataSet.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Reports\PrintRepairSummary.aspx.cs">
+      <DependentUpon>PrintRepairSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\PrintRepairSummary.aspx.designer.cs">
+      <DependentUpon>PrintRepairSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RepairSummary.aspx.cs">
+      <DependentUpon>RepairSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RepairSummary.aspx.designer.cs">
+      <DependentUpon>RepairSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportDay.aspx.cs">
+      <DependentUpon>ReportDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportDay.aspx.designer.cs">
+      <DependentUpon>ReportDay.aspx</DependentUpon>
+    </Compile>
+    <Content Include="App_Code\LabelExtensions.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
+    <Compile Include="Controllers\CauseController.cs" />
+    <Compile Include="Controllers\ColorController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsuranceController.cs" />
+    <Compile Include="Controllers\ProductAccessorieController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductTypeController.cs" />
+    <Compile Include="Controllers\AppSettingController.cs" />
+    <Compile Include="Helpers\HelperController.cs" />
+    <Compile Include="Helpers\RealTimeJTableDemoHub.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\StaffRoleController.cs" />
+    <Compile Include="Controllers\TransportController.cs" />
+    <Compile Include="Controllers\WorkingStatusController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\BookingViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\base.css" />
+    <Content Include="Content\highlight.css" />
+    <Content Include="Content\images\Misc\note.png" />
+    <Content Include="Content\images\Misc\phone.png" />
+    <Content Include="Content\images\Themes\blue.png" />
+    <Content Include="Content\images\Themes\green.png" />
+    <Content Include="Content\images\Themes\purple.png" />
+    <Content Include="Content\images\Themes\red.png" />
+    <Content Include="Content\Site2.css" />
+    <Content Include="Content\themes\activo\style.css" />
+    <Content Include="Content\themes\amro\style.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.all.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.base.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\bec-green\style.css" />
+    <Content Include="Content\themes\bec\style.css" />
+    <Content Include="Content\themes\blue\style.css" />
+    <Content Include="Content\themes\default\images\arrow.png" />
+    <Content Include="Content\themes\default\images\bgd.jpg" />
+    <Content Include="Content\themes\default\images\boxbar-background.png" />
+    <Content Include="Content\themes\default\images\button-background-active.png" />
+    <Content Include="Content\themes\default\images\button-background.png" />
+    <Content Include="Content\themes\default\images\messages\error.png" />
+    <Content Include="Content\themes\default\images\messages\notice.png" />
+    <Content Include="Content\themes\default\images\messages\warning.png" />
+    <Content Include="Content\themes\default\style.css" />
+    <Content Include="Content\themes\djime-cerulean\style.css" />
+    <Content Include="Content\themes\drastic-dark\style.css" />
+    <Content Include="Content\themes\kathleene\style.css" />
+    <Content Include="Content\themes\olive\style.css" />
+    <Content Include="Content\themes\orange\style.css" />
+    <Content Include="Content\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\themes\redmond\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Content\themes\red\style.css" />
+    <Content Include="Content\themes\reidb-greenish\style.css" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\smoothness\jquery-ui-1.8.22.custom.css" />
+    <Content Include="Content\themes\warehouse\style.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\10.png" />
+    <Content Include="Images\12.png" />
+    <Content Include="Images\36.png" />
+    <Content Include="Images\41.png" />
+    <Content Include="Images\9.png" />
+    <Content Include="Images\application_edit.png" />
+    <Content Include="Images\arrow.png" />
+    <Content Include="Images\camera.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\cross.png" />
+    <Content Include="Images\group2.png" />
+    <Content Include="Images\hourglass.png" />
+    <Content Include="Images\icons\12.png" />
+    <Content Include="Images\icons\36.png" />
+    <Content Include="Images\icons\application_edit.png" />
+    <Content Include="Images\icons\arrow.png" />
+    <Content Include="Images\icons\cross.png" />
+    <Content Include="Images\icons\hourglass.png" />
+    <Content Include="Images\icons\Information.gif" />
+    <Content Include="Images\icons\key.png" />
+    <Content Include="Images\icons\loading.gif" />
+    <Content Include="Images\icons\note.png" />
+    <Content Include="Images\icons\page_white_edit.png" />
+    <Content Include="Images\icons\phone.png" />
+    <Content Include="Images\icons\sort_asc.png" />
+    <Content Include="Images\icons\sort_both.png" />
+    <Content Include="Images\icons\sort_desc.png" />
+    <Content Include="Images\icons\tag.png" />
+    <Content Include="Images\icons\tick.png" />
+    <Content Include="Images\Information.gif" />
+    <Content Include="Images\key.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\note.png" />
+    <Content Include="Images\page_white_edit.png" />
+    <Content Include="Images\phone.png" />
+    <Content Include="Images\printer_error.png" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\tag.png" />
+    <Content Include="Images\tick.png" />
+    <Content Include="Reports\ClaimSummary.aspx" />
+    <Content Include="Reports\PrintRepairSummary.aspx" />
+    <Content Include="Reports\RepairSummary.aspx" />
+    <Content Include="Reports\ReportDay.aspx" />
+    <Content Include="Scripts\autocompletefb\delete.gif" />
+    <Content Include="Scripts\autocompletefb\jquery.autocomplete.js" />
+    <Content Include="Scripts\autocompletefb\jquery.autocompletefb.css" />
+    <Content Include="Scripts\autocompletefb\jquery.autocompletefb.js" />
+    <Content Include="Scripts\autocompletefb\jquery.bgiframe.min.js" />
+    <Content Include="Scripts\autocompletefb\jquery.dimensions.js" />
+    <Content Include="Scripts\autocomplete\jquery.autocomplete.css" />
+    <Content Include="Scripts\autocomplete\jquery.autocomplete.js" />
+    <Content Include="Scripts\datepicker\ui.datepicker-th3.js" />
+    <Content Include="Scripts\smartwizard\jquery.smartWizard-2.0.min-backup.js" />
+    <Content Include="Scripts\wall\walls2.css" />
+    <Content Include="Scripts\wall\date.format.js" />
+    <Content Include="Scripts\datepicker\ui.datepicker-th2.js" />
+    <Content Include="Scripts\datepicker\jquery-ui-1.8.10.offset.datepicker.min.js" />
+    <Content Include="Scripts\datepicker\ui.datepicker-th.js" />
+    <Content Include="Scripts\formatCurrency\jquery.formatCurrency-1.4.0.js" />
+    <Content Include="Scripts\formatCurrency\jquery.formatCurrency-1.4.0.min.js" />
+    <Content Include="Scripts\wall\header.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery-1.7.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.14.js" />
+    <Content Include="Scripts\jquery-ui-1.8.17.js" />
+    <Content Include="Scripts\jquery-ui-1.8.17.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.signalR.js" />
+    <Content Include="Scripts\jquery.signalR.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.js" />
+    <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.min.js" />
+    <Content Include="Scripts\jtable\external\json2.js" />
+    <Content Include="Scripts\jtable\external\json2.min.js" />
+    <Content Include="Scripts\jtable\jquery.jtable.js" />
+    <Content Include="Scripts\jtable\jquery.jtable.min.js" />
+    <Content Include="Scripts\jtable\themes\empty\jtable_empty.css" />
+    <Content Include="Scripts\jtable\themes\lightcolor\bg-thead.png" />
+    <Content Include="Scripts\jtable\themes\lightcolor\blue\jtable.css" />
+    <Content Include="Scripts\jtable\themes\lightcolor\blue\loading.gif" />
+    <Content Include="Scripts\jtable\themes\lightcolor\close.png" />
+    <Content Include="Scripts\jtable\themes\lightcolor\column-asc.png" />
+    <Content Include="Scripts\jtable\themes\lightcolor\column-desc.png" />
+    <Content Include="Scripts\jtable\themes\lightcolor\column-sortable.png" />
+    <Content Include="Scripts\jtable\themes\lightcolor\delete.png" />
+    <Content Include="Scripts\jtable\themes\lightcolor\edit.png" />
+    <Content Include="Scripts\jtable\themes\lightcolor\gray\jtable.css" />
+    <Content Include="Scripts\jtable\themes\lightcolor\gray\loading.gif" />
+    <Content Include="Scripts\jtable\themes\lightcolor\gray\loading2.gif" />
+    <Content Include="Scripts\jtable\themes\lightcolor\green\jtable.css" />
+    <Content Include="Scripts\jtable\themes\lightcolor\green\loading.gif" />
+    <Content Include="Scripts\jtable\themes\lightcolor\jtable_lightcolor_base.css" />
+    <Content Include="Scripts\jtable\themes\lightcolor\orange\jtable.css" />
+    <Content Include="Scripts\jtable\themes\lightcolor\orange\loading.gif" />
+    <Content Include="Scripts\jtable\themes\lightcolor\red\jtable.css" />
+    <Content Include="Scripts\jtable\themes\lightcolor\red\loading.gif" />
+    <Content Include="Scripts\jtable\themes\standard\blue\header-bg.gif" />
+    <Content Include="Scripts\jtable\themes\standard\blue\jtable_blue.css" />
+    <Content Include="Scripts\jtable\themes\standard\blue\loading.gif" />
+    <Content Include="Scripts\jtable\themes\standard\blue\title-bg.png" />
+    <Content Include="Scripts\jtable\themes\standard\close.png" />
+    <Content Include="Scripts\jtable\themes\standard\column-asc.png" />
+    <Content Include="Scripts\jtable\themes\standard\column-desc.png" />
+    <Content Include="Scripts\jtable\themes\standard\column-sortable.png" />
+    <Content Include="Scripts\jtable\themes\standard\delete.png" />
+    <Content Include="Scripts\jtable\themes\standard\edit.png" />
+    <Content Include="Scripts\jtable\themes\standard\green\header-bg.gif" />
+    <Content Include="Scripts\jtable\themes\standard\green\jtable_green.css" />
+    <Content Include="Scripts\jtable\themes\standard\green\loading.gif" />
+    <Content Include="Scripts\jtable\themes\standard\green\title-bg.png" />
+    <Content Include="Scripts\jtable\themes\standard\jtable_standard_base.css" />
+    <Content Include="Scripts\jtable\themes\standard\purple\jtable_purple.css" />
+    <Content Include="Scripts\jtable\themes\standard\purple\loading.gif" />
+    <Content Include="Scripts\jtable\themes\standard\red\header-bg.gif" />
+    <Content Include="Scripts\jtable\themes\standard\red\jtable_red.css" />
+    <Content Include="Scripts\jtable\themes\standard\red\loading.gif" />
+    <Content Include="Scripts\jtable\themes\standard\red\title-bg.png" />
+    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\smartwizard\jquery.smartWizard-2.0.min.js" />
+    <Content Include="Scripts\smartwizard\smart_wizard.css" />
+    <Content Include="Scripts\smartwizard\smart_wizard_vertical.css" />
+    <Content Include="Scripts\syntaxhighligher\shBrushCSharp.js" />
+    <Content Include="Scripts\syntaxhighligher\shBrushCss.js" />
+    <Content Include="Scripts\syntaxhighligher\shBrushJava.js" />
+    <Content Include="Scripts\syntaxhighligher\shBrushJScript.js" />
+    <Content Include="Scripts\syntaxhighligher\shBrushPhp.js" />
+    <Content Include="Scripts\syntaxhighligher\shBrushSql.js" />
+    <Content Include="Scripts\syntaxhighligher\shBrushXml.js" />
+    <Content Include="Scripts\syntaxhighligher\shCore.js" />
+    <Content Include="Scripts\syntaxhighligher\styles\shCore.css" />
+    <Content Include="Scripts\syntaxhighligher\styles\shThemeDefault.css" />
+    <Content Include="Scripts\textboxlist\close.gif" />
+    <Content Include="Scripts\textboxlist\GrowingInput.js" />
+    <Content Include="Scripts\textboxlist\jquery-1.3.2.min.js" />
+    <Content Include="Scripts\textboxlist\SuggestInput.js" />
+    <Content Include="Scripts\textboxlist\TextboxList.Autocomplete.Binary.js" />
+    <Content Include="Scripts\textboxlist\TextboxList.Autocomplete.css" />
+    <Content Include="Scripts\textboxlist\TextboxList.Autocomplete.js" />
+    <Content Include="Scripts\textboxlist\TextboxList.css" />
+    <Content Include="Scripts\textboxlist\TextboxList.js" />
+    <Content Include="Scripts\thaidate\ui.datepicker-th.js" />
+    <Content Include="Scripts\thaidate\ui.datepicker.js" />
+    <Content Include="Scripts\tokeninput\jquery.tokeninput.js" />
+    <Content Include="Scripts\tokeninput\token-input-facebook.css" />
+    <Content Include="Scripts\tokeninput\token-input.css" />
+    <Content Include="Scripts\uploader\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\uploader\jquery.uploadify.js" />
+    <Content Include="Scripts\uploader\uploader.swf" />
+    <Content Include="Scripts\uploader\uploadify.css" />
+    <Content Include="Scripts\validationEngine\jquery.validationEngine-en.js" />
+    <Content Include="Scripts\validationEngine\jquery.validationEngine.js" />
+    <Content Include="Scripts\validationEngine\validationEngine.jquery.css" />
+    <Content Include="Scripts\virtualsearch\visualsearch-0.2.2.js" />
+    <Content Include="Scripts\wall\walls.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\AddCustomer.cshtml" />
+    <Content Include="Views\Home\autocomplete.cshtml" />
+    <Content Include="Views\Home\Confirm.cshtml" />
+    <Content Include="Views\Home\datetime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\Assets.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Lists.cshtml" />
+    <Content Include="Views\Home\TestAddBooking.cshtml" />
+    <Content Include="Views\Home\tokeninput.cshtml" />
+    <Content Include="Views\Home\validation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Insurance\Index.cshtml" />
+    <Content Include="Views\Insurance\Lists.cshtml" />
+    <Content Include="Views\ProductAccessorie\Index.cshtml" />
+    <Content Include="Views\ProductAccessorie\Lists.cshtml" />
+    <Content Include="Views\ProductType\Index.cshtml" />
+    <Content Include="Views\ProductType\Lists.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Lists.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Brand\Index.cshtml" />
+    <Content Include="Views\Cause\Index.cshtml" />
+    <Content Include="Views\Cause\Lists.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Lists.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Staff\Lists.cshtml" />
+    <Content Include="Views\Transport\Index.cshtml" />
+    <Content Include="Views\Transport\Lists.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeTemplates\AddController\Controller.tt" />
+    <None Include="CodeTemplates\AddView\AspxCSharp\Create.tt" />
+    <None Include="CodeTemplates\AddView\AspxCSharp\Delete.tt" />
+    <None Include="CodeTemplates\AddView\AspxCSharp\Details.tt" />
+    <None Include="CodeTemplates\AddView\AspxCSharp\Edit.tt" />
+    <None Include="CodeTemplates\AddView\AspxCSharp\Empty.tt" />
+    <None Include="CodeTemplates\AddView\AspxCSharp\List.tt" />
+    <None Include="CodeTemplates\AddView\CSHTML\Create.tt" />
+    <None Include="CodeTemplates\AddView\CSHTML\Delete.tt" />
+    <None Include="CodeTemplates\AddView\CSHTML\Details.tt" />
+    <None Include="CodeTemplates\AddView\CSHTML\Edit.tt" />
+    <None Include="CodeTemplates\AddView\CSHTML\Empty.tt" />
+    <None Include="CodeTemplates\AddView\CSHTML\List.tt" />
+    <Content Include="Views\Color\Index.cshtml" />
+    <Content Include="Views\Color\Lists.cshtml" />
+    <Content Include="Views\Brand\Lists.cshtml" />
+    <None Include="Content\themes\default\fonts\museo700-regular-webfont.eot" />
+    <None Include="Content\themes\default\fonts\museo700-regular-webfont.svg" />
+    <None Include="Content\themes\default\fonts\museo700-regular-webfont.ttf" />
+    <None Include="Content\themes\default\fonts\museo700-regular-webfont.woff" />
+    <None Include="Content\themes\default\fonts\museosans_500-webfont.eot" />
+    <None Include="Content\themes\default\fonts\museosans_500-webfont.svg" />
+    <None Include="Content\themes\default\fonts\museosans_500-webfont.ttf" />
+    <None Include="Content\themes\default\fonts\museosans_500-webfont.woff" />
+    <None Include="Content\themes\default\fonts\museosans_500_italic-webfont.eot" />
+    <None Include="Content\themes\default\fonts\museosans_500_italic-webfont.svg" />
+    <None Include="Content\themes\default\fonts\museosans_500_italic-webfont.ttf" />
+    <None Include="Content\themes\default\fonts\museosans_500_italic-webfont.woff" />
+    <Content Include="Views\Home\visualsearch.cshtml" />
+    <Content Include="Views\Home\addCause.cshtml" />
+    <Content Include="Views\Home\addRow.cshtml" />
+    <Content Include="Views\Home\textboxlist.cshtml" />
+    <Content Include="Views\Home\autocompletefb.cshtml" />
+    <Content Include="Views\AppSetting\Index.cshtml" />
+    <Content Include="Views\WorkingStatus\Lists.cshtml" />
+    <Content Include="Views\WorkingStatus\Index.cshtml" />
+    <Content Include="Views\Shared\_UserNavigation.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Shared\_MainNavigation.cshtml" />
+    <None Include="Reports\GHDataSet.xsc">
+      <DependentUpon>GHDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\GHDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GHDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\GHDataSet.xss">
+      <DependentUpon>GHDataSet.xsd</DependentUpon>
+    </None>
+    <Content Include="Views\AppSetting\UserProfile.cshtml" />
+    <Content Include="Views\AppSetting\UserPassword.cshtml" />
+    <Content Include="Views\Repair\_Brand.cshtml" />
+    <Content Include="Views\Repair\Summary.cshtml" />
+    <Content Include="Views\Repair\_CreateCause.cshtml" />
+    <Content Include="Views\Repair\_CreateColor.cshtml" />
+    <Content Include="Views\Repair\_CreateCustomer.cshtml" />
+    <Content Include="Views\Repair\_CreateProduct.cshtml" />
+    <Content Include="Views\Repair\_CreateProductAccessorie.cshtml" />
+    <Content Include="Views\Repair\_ProductType.cshtml" />
+    <Content Include="Views\Repair\Confirm.cshtml" />
+    <Content Include="Views\Repair\Create.cshtml" />
+    <Content Include="Views\Repair\Index.cshtml" />
+    <Content Include="Views\Repair\ListsQC.cshtml" />
+    <Content Include="Views\Claim\_Brand.cshtml" />
+    <Content Include="Views\Claim\Summary.cshtml" />
+    <Content Include="Views\Claim\_CreateCause.cshtml" />
+    <Content Include="Views\Claim\_CreateInsurance.cshtml" />
+    <Content Include="Views\Claim\_CreateProduct.cshtml" />
+    <Content Include="Views\Claim\_ProductType.cshtml" />
+    <Content Include="Views\Claim\Confirm.cshtml" />
+    <Content Include="Views\Claim\Create.cshtml" />
+    <Content Include="Views\Claim\Index.cshtml" />
+    <Content Include="Views\Claim\Lists.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\Report.cshtml" />
+    <Content Include="Views\Tracking\Index.cshtml" />
+    <Content Include="Views\Home\thaidate.cshtml" />
+    <Content Include="Views\Home\print.cshtml" />
+    <Content Include="Views\Uploader\Index.cshtml" />
+    <None Include="Scripts\uploader\uploader.fla" />
+    <Content Include="Views\Repair\Lists.cshtml" />
+    <Content Include="Views\Repair\ListsTC.cshtml" />
+    <Content Include="Views\Repair\ListsFR.cshtml" />
+    <Content Include="Views\Repair\ListsCR.cshtml" />
+    <Content Include="Views\Shared\_BoxAlert.cshtml" />
+    <Content Include="Views\Repair\ListsSTC.cshtml" />
+    <Content Include="Views\Claim\ListsCR.cshtml" />
+    <Content Include="Views\Claim\ListsUser.cshtml" />
+    <Content Include="Views\Report\ReportDay.cshtml" />
+    <Content Include="Views\Report\ReportMonth.cshtml" />
+    <Content Include="Views\Report\ReportServices.cshtml" />
+    <Content Include="Views\Report\ReportServiceDay.cshtml" />
+    <Content Include="Reports\BoxNote.aspx" />
+    <Content Include="Views\Remind\Index.cshtml" />
+    <Content Include="Views\Remind\Lists.cshtml" />
+    <Content Include="Views\Shared\_Wall.cshtml" />
+    <Content Include="Views\Repair\RepairSummary.cshtml" />
+    <Content Include="Views\Repair\Edit.cshtml" />
+    <Content Include="Views\Claim\Edit.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Repair\_EditProduct.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\themes\activo\images\" />
+    <Folder Include="Content\uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GH.DAL\GH.DAL.csproj">
+      <Project>{89FD0D9F-19AE-42E4-BC86-6749524A01CE}</Project>
+      <Name>GH.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GH.Memberships\GH.Memberships.csproj">
+      <Project>{370AF053-7059-4EDF-9F27-CD8F19CE6696}</Project>
+      <Name>GH.Memberships</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\ClaimProduct.rdlc" />
+    <EmbeddedResource Include="Reports\InformRepair.rdlc" />
+    <EmbeddedResource Include="Reports\ReportDay.rdlc" />
+    <EmbeddedResource Include="Reports\ReturnProduct.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4014</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

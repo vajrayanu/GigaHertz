@@ -1,0 +1,35 @@
+﻿<html>
+<head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../Scripts/tokeninput/jquery.tokeninput.js"></script>
+
+    <link rel="stylesheet" href="../Scripts/tokeninput/token-input.css" type="text/css" />
+  
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/tokeninput/token-input-facebook.css")" type="text/css" />
+   
+</head>
+
+<body>
+
+
+    <h2 id="custom-labels">Custom Labels</h2>
+   
+    <input type="text" id="demo-input-custom-labels" name="q" />
+  
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#demo-input-custom-labels").tokenInput("/Cause/Search" + $(this).val(), {
+                minChars: 1,
+                theme: "facebook",
+                preventDuplicates: true,
+                hintText: "ค้นหาอาการ?",
+                noResultsText: "No data available!",
+                searchingText: "ค้นหา..."
+            });
+        });
+</script>
+
+
+   
+</body>
+</html>

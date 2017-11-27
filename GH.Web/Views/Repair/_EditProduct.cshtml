@@ -1,0 +1,197 @@
+﻿@model GH.Web.Models.BookingRepairViewModel
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th2.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#jtSearchingProduct').autocomplete({
+                source: '@Url.Action("Search2", "Product")',
+                minLength: 1,
+                select: function (event, ui) {
+                    ProductClear();
+
+                    $('#Repair_kProductId').val(ui.item.kProductId);
+                    $('#Repair_sSerial').val(ui.item.sSerial);
+                    $('#Repair_dtInsuranceExpire').val(ui.item.dtInsuranceExpire);
+
+                    $('#Product_sProductName').val(ui.item.sProductName);
+                    $('#Product_sProductModel').val(ui.item.sProductModel);
+
+                    $('#Product_kProductTypeId').val(ui.item.kProductTypeId);
+                    $('#Product_kBrandId').val(ui.item.kBrandId);
+
+                    //$('#Product_kProductTypeId').val(ui.item.kProductTypeId);
+                    //$('#Product_ProductType_sDescription').val(ui.item.sProductTypeDescription);
+                    //$('#Product_kBrandId').val(ui.item.kBrandId);
+                    //$('#Product_Brand_sBrandName').val(ui.item.sBrandDescription);
+                    return false;
+                }
+            });
+
+            $('#jtSearchingProductBack').autocomplete({
+                source: '@Url.Action("SearchJobID", "Product")',
+                minLength: 1,
+                select: function (event, ui) {
+                    ProductClear();
+
+                    $('#Repair_kProductId').val(ui.item.kProductId);
+                    $('#Repair_sRepairNo').val(ui.item.sRepairNo);
+                    $('#Repair_sSerial').val(ui.item.sSerial);
+                    $('#Repair_dtInsuranceExpire').val(ui.item.dtInsuranceExpire);
+                    $('#Product_sProductName').val(ui.item.sProductName);
+                    $('#Product_sProductModel').val(ui.item.sProductModel);
+                    $('#Product_kProductTypeId').val(ui.item.kProductTypeId);
+                    $('#Product_kBrandId').val(ui.item.kBrandId);
+
+                    return false;
+                }
+            });
+        });
+    });
+
+
+    function ProductClear() {
+        $('#jtSearchingProduct').val('');
+        $('#jtSearchingProductBack').val('');
+        $('#Repair_kProductId').val('');
+        $('#Repair_sRepairNo').val('');
+        $('#Repair_sNote').val('');
+        $('#Repair_sSerial').val('');
+        $('#Repair_dtInsuranceExpire').val('');
+        $('#Repair_dtDueDate').val('');
+        $('#Repair_sProductAccessories').val('');
+        $('#Repair_sColor').val('');
+        $('#Product_kProductTypeId').val('');
+        $('#Product_ProductType_sDescription').val('');
+        $('#Product_kBrandId').val('');
+        $('#Product_Brand_sBrandName').val('');
+        $('#Product_sProductName').val('');
+        $('#Product_sProductModel').val('');
+    }
+
+    function OpenPopup(popurl) {
+
+        winpops = window.open(popurl, "", "width=400,height=200")
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#Repair_dtInsuranceExpire").datepicker();
+        $("#Repair_dtDueDate").datepicker();
+        $("#Repair_dtDateUpdate").datepicker();
+    });
+</script>
+
+
+<table cellspacing="20">
+    <tr>
+        <td>
+            <div class="group wat-cf">
+                <input type="text" id="jtSearchingProduct" name="jtSearchingProduct" placeholder="ค้นหาสินค้า" class="textBoxStyle" />
+                <button type="submit" id="LoadRecordsButton" class="buttonStyle" style="display:none">ค้นหา</button>
+                @Html.TextBoxFor(model => model.Repair.kProductId, new {  @Style = "display:none" })
+                @Html.TextBoxFor(model => model.Repair.sRepairNo, new { @Style = "display:none" })
+            </div>
+        </td>
+        <td>
+            <input type="text" id="jtSearchingProductBack" name="jtSearchingProductBack" placeholder="ค้นหาเครื่องตีกลับ" class="textBoxStyle" />
+            <input type="button" class="buttonStyle" onclick="ProductClear();" value="Clear" />
+            <input type="button" class="buttonStyle" onclick="OpenPopup('/Uploader?id=@ViewBag.SessionId');" value="เพิ่มรูปสินค้า" />
+        </td>
+    </tr>
+    <tr style="vertical-align:top;">
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.kProductTypeId, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		             @Html.DropDownListFor(m => m.Product.kProductTypeId, new SelectList(ViewBag.ProductTypes, "kProductTypeId", "sDescription"), "-- เลือก --", new { @class = "SelectStyle validate[required]" })
+                    @* @Html.Partial("_ProductType")*@
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.kBrandId, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.DropDownListFor(m => m.Product.kBrandId, new SelectList(ViewBag.Brands, "kBrandId", "sBrandName"), "-- เลือก --", new { @class = "SelectStyle validate[required]" })
+                    @*@Html.Partial("_Brand")*@
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.sProductModel, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Product.sProductModel, new { @class = "textBoxStyle" })
+	            </div>
+            </div>	
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Repair.sSerial, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Repair.sSerial, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Repair.dtInsuranceExpire, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Repair.dtInsuranceExpire, new { @class = "textBoxStyle" })
+	            </div>
+            </div>	
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Repair.dtDueDate, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Repair.dtDueDate, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>
+        </td>
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Product.sProductName, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Product.sProductName, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Repair.sNote, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Repair.sNote, new { @class = "textBoxStyle" })
+	            </div>
+            </div>	
+            <div class="group wat-cf">
+                @Html.Partial("_CreateProductAccessorie")
+            </div>
+            <div class="group wat-cf">
+                @Html.Partial("_CreateColor")
+            </div>
+
+
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Repair.dtDateUpdate, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Repair.dtDateUpdate, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+			

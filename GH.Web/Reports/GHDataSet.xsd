@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GHDataSet" targetNamespace="http://tempuri.org/GHDataSet.xsd" xmlns:mstns="http://tempuri.org/GHDataSet.xsd" xmlns="http://tempuri.org/GHDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DataContext" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DataContext (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DataContext.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources>
+          <DbSource ConnectionRef="DataContext (Web.config)" DbObjectName="gigahertz.dbo.RepairCauses" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="RepairCauses" MethodsParameterType="CLR" Modifier="Public" Name="RepairCauses" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="RepairCauses">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>SELECT     sDescription, dPrice
+FROM         RepairCauses</CommandText>
+                <Parameters />
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="DataContext (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuery" MethodsParameterType="CLR" Modifier="Public" Name="ScalarQuery" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="ScalarQuery">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>select r.srepairno,pt.sDescription from Repairs r inner join
+Products p 
+on r.kProductId=p.kProductId inner join
+ProductTypes pt
+on p.kProductTypeId=pt.kProductTypeId</CommandText>
+                <Parameters />
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="GHDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="GHDataSet" msprop:Generator_UserDSName="GHDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RepairCauses" msprop:Generator_TableClassName="RepairCausesDataTable" msprop:Generator_TableVarName="tableRepairCauses" msprop:Generator_TablePropName="RepairCauses" msprop:Generator_RowDeletingName="RepairCausesRowDeleting" msprop:Generator_UserTableName="RepairCauses" msprop:Generator_RowChangingName="RepairCausesRowChanging" msprop:Generator_RowEvHandlerName="RepairCausesRowChangeEventHandler" msprop:Generator_RowDeletedName="RepairCausesRowDeleted" msprop:Generator_RowEvArgName="RepairCausesRowChangeEvent" msprop:Generator_RowChangedName="RepairCausesRowChanged" msprop:Generator_RowClassName="RepairCausesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sDescription" msprop:Generator_ColumnVarNameInTable="columnsDescription" msprop:Generator_ColumnPropNameInRow="sDescription" msprop:Generator_ColumnPropNameInTable="sDescriptionColumn" msprop:Generator_UserColumnName="sDescription" type="xs:string" minOccurs="0" />
+              <xs:element name="dPrice" msprop:Generator_ColumnVarNameInTable="columndPrice" msprop:Generator_ColumnPropNameInRow="dPrice" msprop:Generator_ColumnPropNameInTable="dPriceColumn" msprop:Generator_UserColumnName="dPrice" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ClaimProduct" msprop:Generator_TableClassName="ClaimProductDataTable" msprop:Generator_TableVarName="tableClaimProduct" msprop:Generator_TablePropName="ClaimProduct" msprop:Generator_RowDeletingName="ClaimProductRowDeleting" msprop:Generator_UserTableName="ClaimProduct" msprop:Generator_RowChangingName="ClaimProductRowChanging" msprop:Generator_RowEvHandlerName="ClaimProductRowChangeEventHandler" msprop:Generator_RowDeletedName="ClaimProductRowDeleted" msprop:Generator_RowEvArgName="ClaimProductRowChangeEvent" msprop:Generator_RowChangedName="ClaimProductRowChanged" msprop:Generator_RowClassName="ClaimProductRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iQty" msprop:Generator_ColumnVarNameInTable="columniQty" msprop:Generator_ColumnPropNameInRow="iQty" msprop:Generator_ColumnPropNameInTable="iQtyColumn" msprop:Generator_UserColumnName="iQty" type="xs:string" minOccurs="0" />
+              <xs:element name="sNote" msprop:Generator_ColumnVarNameInTable="columnsNote" msprop:Generator_ColumnPropNameInRow="sNote" msprop:Generator_ColumnPropNameInTable="sNoteColumn" msprop:Generator_UserColumnName="sNote" type="xs:string" minOccurs="0" />
+              <xs:element name="sDescription" msprop:Generator_ColumnVarNameInTable="columnsDescription" msprop:Generator_ColumnPropNameInRow="sDescription" msprop:Generator_ColumnPropNameInTable="sDescriptionColumn" msprop:Generator_UserColumnName="sDescription" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

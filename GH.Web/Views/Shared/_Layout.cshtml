@@ -1,0 +1,71 @@
+﻿@model GH.Web.Models.ApplicationHeaderViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        บริษัท กิกกะเฮิร์ทซ คอมสแควร์ จำกัด
+    </title>
+    @Assets.CSS("base.css")
+    @Assets.Theme("default")
+    @Assets.jQuery()
+    @Assets.Script("modernizr-1.7.min.js")
+    @RenderSection("CssImport", false)    @RenderSection("JavascriptImport", false)    
+
+    <!-- Include style files -->
+    <link href="@Url.Content("~/Content/themes/smoothness/jquery-ui-1.8.22.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Scripts/jtable/themes/lightcolor/gray/jtable.css")" rel="stylesheet" type="text/css" />
+
+   
+    <!-- Include jQuery -->
+    <script src="@Url.Content("~/Scripts/jquery-1.7.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.17.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-1.7.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/syntaxhighligher/shCore.js")" type="text/javascript"></script>
+    
+    
+    <!-- Include Autocomplete -->
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+   
+
+    <!-- Include jTable -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jtable/jquery.jtable.js")"></script>
+
+
+    <!-- Include SignalR -->
+    <script src="@Url.Content("~/Scripts/jquery.signalR.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
+    
+
+    <!-- Include Validation engine style file -->
+    <link href="@Url.Content("~/Scripts/validationEngine/validationEngine.jquery.css")" rel="stylesheet" type="text/css" />
+
+    <!-- Validation engine script file and english localization -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine-en.js")"></script>
+
+    <!-- Include Thai Calendar -->
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/jquery-ui-1.8.10.offset.datepicker.min.js")"></script>*@
+
+</head>
+<body>
+    <div id="container">
+        <p style="display:inline-block;padding:0 20px 15px;position: absolute;z-index:100;">
+            <img style="width:100px;height:70px" src="/Content/uploads/iService_Button.png" />
+        </p>
+        <div id="header">
+            <h1 style="padding-left:110px">
+                @Html.ActionLink("iService","Index","Home")
+            </h1>
+            @Html.Partial("_UserNavigation")
+            @Html.Partial("_MainNavigation")
+        </div>
+        <div id="wrapper" class="wat-cf">
+            <div id="main">
+                @RenderBody()                
+            </div>            
+            @Html.Partial("_SideBar")
+        </div>
+        @Html.Partial("_Footer")
+</body>
+</html>

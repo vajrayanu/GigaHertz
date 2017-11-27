@@ -1,0 +1,149 @@
+﻿@model GH.DAL.Model.Customer
+<div id="block-create" class="block">
+    <div class="content">
+        <h2 class="title">
+            AddCustomer</h2>
+        <div class="inner">
+@using (Html.BeginForm("AddCustomer", "Insert Controller Name Here", FormMethod.Post, new { @class = "form" })) 
+{
+    <div class="flash">
+         <p>@Html.ValidationSummary(true,string.Empty, new { @class = "message error" })</p>
+    </div>
+
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sCustomerName, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sCustomerName, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sCustomerName)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.dtDateBirth, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.dtDateBirth, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.dtDateBirth)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sAddress1, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sAddress1, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sAddress1)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sAddress2, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sAddress2, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sAddress2)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sCity, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sCity, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sCity)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sZip, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sZip, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sZip)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sPhone, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sPhone, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sPhone)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sMobile, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sMobile, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sMobile)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sFax, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sFax, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sFax)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.sEmailAddress, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.sEmailAddress, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.sEmailAddress)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.dtDateAdd, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.dtDateAdd, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.dtDateAdd)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group wat-cf">
+		    <div class="left">
+			    @Html.LabelFor(model => model.dtDateUpdate, new { @class = "label" })
+			</div>
+			<div class="right">
+				@Html.TextBoxFor(model => model.dtDateUpdate, new { @class = "text_field" })
+				@Html.ValidationMessageFor(model => model.dtDateUpdate)
+				<span class="description">Ex: property description</span>
+			</div>
+		</div>
+		<div class="group navform wat-cf">
+		    <div class="right">
+			    <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick.png")" alt="Save" />
+				Save
+				</button>
+				<span class="text_button_padding">or</span>
+				@Html.ActionLink("Cancel", "Index", null, new { @class = "text_button_padding link_button" })
+			</div>
+		</div>
+}
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

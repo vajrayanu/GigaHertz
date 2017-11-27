@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    
+<div id="block-tables" class="block">
+<div class="content">
+<div class="inner">
+    @Html.Partial("Lists")
+</div>
+</div>
+</div>
+   
+
+
+@*
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="StudentTableContainer">
+</div>
+<div id="MessagingDiv" class="rectangular-area">
+    Enter a message to send to all users:
+    <input type="text" id="Message" style="width: 300px;" maxlength="128" />
+</div>
+<div id="TableUpdates" class="rectangular-area">
+    <h3>
+        Latest received events (You are <span id="MyClientName">@ViewBag.ClientName</span>):
+    </h3>
+    <ul id="EventsList">
+    </ul>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //ViewBag.ClientName is set to a random name in the Index action.
+        var myClientName = '@ViewBag.ClientName';
+
+        //Initialize jTable
+        $('#StudentTableContainer').jtable({
+            title: 'Student List',
+            actions: {
+                listAction: '@Url.Action("StudentList")?clientName=' + myClientName,
+                deleteAction: '@Url.Action("DeleteStudent")?clientName=' + myClientName,
+                updateAction: '@Url.Action("UpdateStudent")?clientName=' + myClientName,
+                createAction: '@Url.Action("CreateStudent")?clientName=' + myClientName
+            },
+            fields: {
+                StudentId: {
+                    title: 'Id',
+                    width: '8%',
+                    key: true,
+                    create: false,
+                    edit: false
+                },
+                Name: {
+                    title: 'Name',
+                    width: '21%'
+                },
+                EmailAddress: {
+                    title: 'Email address',
+                    list: false
+                },
+                Password: {
+                    title: 'User Password',
+                    type: 'password',
+                    list: false
+                },
+                Gender: {
+                    title: 'Gender',
+                    width: '12%',
+                    options: { 'M': 'Male', 'F': 'Female' }
+                },
+                CityId: {
+                    title: 'City',
+                    width: '11%',
+                    options: '@Url.Action("GetCityOptions")'
+                },
+                BirthDate: {
+                    title: 'Birth date',
+                    width: '13%',
+                    type: 'date',
+                    displayFormat: 'yy-mm-dd'
+                },
+                Education: {
+                    title: 'Education',
+                    list: false,
+                    type: 'radiobutton',
+                    options: { '1': 'Primary school', '2': 'High school', '3': 'University' }
+                },
+                About: {
+                    title: 'About this person',
+                    type: 'textarea',
+                    list: false
+                },
+                IsActive: {
+                    title: 'Status',
+                    width: '10%',
+                    type: 'checkbox',
+                    values: { 'false': 'Passive', 'true': 'Active' },
+                    defaultValue: 'true'
+                },
+                RecordDate: {
+                    title: 'Record date',
+                    width: '15%',
+                    type: 'date',
+                    displayFormat: 'yy-mm-dd',
+                    create: false,
+                    edit: false,
+                    sorting: false
+                }
+            }
+        });
+
+        //Load student list from server
+        $('#StudentTableContainer').jtable('load');
+
+        //Create SignalR object to get communicate with server
+        var realTimeHub = $.connection.realTimeJTableDemoHub;
+
+        //Define a function to get 'record created' events
+        realTimeHub.RecordCreated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#StudentTableContainer').jtable('addRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' has <b>created</b> a new record with id = ' + record.StudentId, 'event-created');
+        };
+
+        //Define a function to get 'record updated' events
+        realTimeHub.RecordUpdated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#StudentTableContainer').jtable('updateRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' has <b>updated</b> a new record with id = ' + record.StudentId, 'event-updated');
+        };
+
+        //Define a function to get 'record deleted' events
+        realTimeHub.RecordDeleted = function (clientName, recordId) {
+            if (clientName != myClientName) {
+                $('#StudentTableContainer').jtable('deleteRecord', {
+                    key: recordId,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' has <b>removed</b> a record with id = ' + recordId, 'event-deleted');
+        };
+
+        //Define a function to get 'chat messages'
+        realTimeHub.GetMessage = function (clientName, message) {
+            writeEvent('<b>' + clientName + '</b> has sent a message: ' + message, 'event-message');
+        };
+
+        $('#Message').keydown(function (e) {
+            if (e.which == 13) { //Enter
+                e.preventDefault();
+                realTimeHub.sendMessage(myClientName, $('#Message').val());
+                $('#Message').val('');
+            }
+        });
+
+        // Start the connection with server
+        $.connection.hub.start();
+
+        //A function to write events to the page
+        function writeEvent(eventLog, logClass) {
+            var now = new Date();
+            var nowStr = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+            $('#EventsList').prepend('<li class="' + logClass + '"><b>' + nowStr + '</b>: ' + eventLog + '.</li>');
+        }
+    });
+
+</script>
+*@

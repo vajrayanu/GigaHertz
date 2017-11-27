@@ -1,0 +1,139 @@
+﻿@model GH.Web.Models.BookingRepairViewModel
+@using GH.Web.Helpers
+
+
+<script type="text/javascript">
+    $().ready(function () {
+        $('#desc').hide();
+
+        $("#jtSearching").autocomplete({
+            source: '@Url.Action("Search2", "Cause")',
+            minLength: 1,
+            select: function (event, ui) {
+                $('#description').val(ui.item.description);
+                $('#price').val(ui.item.price);
+                //return false;
+            }
+        });
+    });
+
+    function addRow(tableID) {
+
+        var table = document.getElementById(tableID);
+
+        var rowCount = table.rows.length;
+        
+        if (rowCount > 0) {
+            $('#desc').show();
+        } else {
+            $('#desc').hide();
+        }
+
+        if (rowCount > 7) {
+            alert('Do not over 7 item');
+            return false;
+        }
+
+        var row = table.insertRow(rowCount);
+
+        //checkbox
+        var cell1 = row.insertCell(0);
+        var element1 = document.createElement("input");
+        element1.type = "checkbox";
+        element1.className = "textBoxStyle";
+        cell1.appendChild(element1);
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = rowCount;
+
+        //อาการ
+        var cell3 = row.insertCell(2);
+        var element2 = document.createElement("input");
+        element2.type = "text";
+        element2.className = "textBoxStyle validate[required]";
+        element2.id = "cause_description_" + rowCount;
+        element2.name = "cause_description_" + rowCount;
+        element2.value = $('#description').val();
+        cell3.appendChild(element2);
+
+        //ราคา
+        var cell4 = row.insertCell(3);
+        var element3 = document.createElement("input");
+        element3.type = "text";
+        element3.className = "textBoxStyle3 validate[custom[number]]";
+        element3.id = "cause_price_" + rowCount;
+        element3.name = "cause_price_" + rowCount;
+        element3.value = $('#price').val();
+        cell4.appendChild(element3);
+
+        // clear value 
+        $('#jtSearching').val('');
+        $('#description').val('');
+        $('#price').val('');
+
+    }
+
+    function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for (var i = 1; i < rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if (null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+          
+            if (rowCount > 1) {
+                $('#desc').show();
+            } else {
+                $('#desc').hide();
+            }
+        } catch (e) {
+            alert(e);
+        }
+    }
+ 
+</script>
+
+<input type="text" id="jtSearching" name="jtSearching" placeholder="ค้นหา..." class="textBoxStyle" />
+<input type="button" value="เพิ่ม" onclick="addRow('dataTable')" class="textBoxStyle" />
+<input type="button" value="ลบ" onclick="deleteRow('dataTable')" class="textBoxStyle" />
+<select id="RepairType" name="RepairType" class="SelectStyle">
+    <option value="1">ซ่อมปกติ</option>
+    <option value="2">ซ่อมด่วน</option>
+</select>
+@Html.DropDownListFor(m => m.Repair.kOwnerId, new SelectList(ViewBag.SuperUser, "kStaffId", "sStaffName"), "-- หัวหน้าช่าง --", new { @class = "SelectStyle validate[required]" })
+
+
+@*@Html.DropDownList("DayWarranty", HelperController.DayWarranty(), "-- รับประกันการซ่อม --", new { @class = "SelectStyle validate[required]" })*@
+<input type="text" id="description" name="description" style="display:none" />
+<input type="text" id="price" name="price" style="display:none" />
+<input type="text" value="@ViewBag.SessionId" id="SessionId" name="SessionId" style="display:none" />
+@using (Html.BeginForm())
+{
+    <table cellspacing="10" id="desc"><tr align="center"><td>อาการ</td><td>ค่าบริการ</td></tr>
+    <tr>
+    <td colspan="3">
+        <table cellspacing="10" id="labeltable">
+            <tr>
+                @*dynamic row here*@
+            </tr>
+        </table>
+        <table cellspacing="10" id="dataTable">
+            <tr>
+                @*dynamic row here*@
+            </tr>
+        </table>
+    </td>
+    <td>
+        <div id="showImg"></div>
+    </td>
+    </tr>
+    </table>
+    
+}

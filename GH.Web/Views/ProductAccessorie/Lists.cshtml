@@ -1,0 +1,75 @@
+﻿
+<div class="navButton">
+    <form>
+        <input type="text" id="jtSearching" name="jtSearching" placeholder="....." class="textBoxStyle" />
+        <button type="submit" id="LoadRecordsButton" class="buttonStyle">ค้นหา</button>
+     </form>
+</div>
+
+<div id="tbLists">
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(function () {
+            $('#jtSearching').autocomplete({
+                source: '@Url.Action("Search")',
+                minLength: 1,
+                select: function (event, ui) { LoadData(); }
+            });
+        });
+
+        LoadData();
+    });
+
+    function LoadData() {
+        $('#tbLists').jtable({
+            title: 'รายการอุปกรณ์',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            defaultSorting: '',
+            actions: {
+                listAction: '@Url.Action("Lists")',
+                deleteAction: '@Url.Action("Delete")',
+                updateAction: '@Url.Action("Edit")',
+                createAction: '@Url.Action("Create")'
+            },
+            fields: {
+                kProductAccessorieId: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                sDescription: {
+                    title: 'Name',
+                    inputClass: 'validate[required]',
+                    width: '30%'
+                }
+            },
+            formCreated: function (event, data) {
+                //not emplement yet
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+            }
+        });
+
+        //Re-load records when user click 'load records' button.
+        $('#LoadRecordsButton').click(function (e) {
+            e.preventDefault();
+            $('#tbLists').jtable('load', {
+                jtSearching: $('#jtSearching').val()
+            });
+        });
+
+        //Load all records when page is first shown
+        $('#LoadRecordsButton').click();
+    }
+</script>

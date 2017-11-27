@@ -1,0 +1,425 @@
+﻿<div id="block-tables" class="block">
+<div class="content">
+<div class="inner">
+<div class="navButton">
+    <form>
+        <input type="text" id="jtSearching" name="jtSearching" placeholder="....." class="textBoxStyle" />
+        <button type="submit" id="LoadRecordsButton" class="buttonStyle">ค้นหา</button>
+         <div style="float:right;padding:5px; display:inline-table ">
+            @Html.DropDownList("jtStatus", (SelectList)ViewBag.WorkingStatus, "--สถานะ--")
+        </div>
+     </form>
+</div>
+
+<div id="tbLists">
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#jtStatus').change(function () {
+            LoadData();
+        });
+
+        //ViewBag.ClientName is set to a random name in the Index action.
+        var myClientName = '@ViewBag.ClientName';
+
+        $(function () {
+            $('#jtSearching').autocomplete({
+                source: '@Url.Action("Search")',
+                minLength: 1,
+                select: function (event, ui) { LoadData(); }
+            });
+            LoadData();
+        });
+
+        function LoadData() {
+            $('#tbLists').jtable({
+                title: 'รายการแจ้งเครม',
+                //saveUserPreferences: false, 
+                paging: true,
+                pageSize: 10,
+                sorting: true,
+                defaultSorting: '',
+                actions: {
+                    listAction: '@Url.Action("Lists")',
+                    //deleteAction: '@Url.Action("Delete")',
+                    //updateAction: '@Url.Action("EditClaim")'
+                },
+                fields: {
+                    kClaimId: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    sClaimNo: {
+                        title: 'เลขอ้างอิง',
+                        create: false,
+                        edit: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            //Create an image that will be used to open child table
+                            var $img = $('<a href="Claim/Edit/' + data.record.kClaimId + '">' + data.record.sClaimNo + '</a>');
+                            // child table when user clicks the image
+                            return $img;
+                        }
+                    },
+                    sRepairNo: {
+                        title: 'เลขที่ซ่อม',
+                        create: false,
+                        edit: false
+                    },
+                    kProductId: {
+                        type: 'hidden'
+                    },
+                    vProductName: {
+                        title: 'สินค้า',
+                        create: false,
+                        edit: false
+                    },
+                    vInsuranceName: {
+                        title: 'ศูนย์ประกัน',
+                        create: false,
+                        edit: false
+                    },
+                    kInsuranceId: {
+                        type: 'hidden'
+                    },
+                    vWorkingStatus: {
+                        title: 'สถานะ',
+                        create: false,
+                        edit: false
+                    },
+                    vStaffName: {
+                        title: 'ผู้ดูแล',
+                        create: false,
+                        edit: false
+                    },
+                    kStaffId: {
+                        title: 'ส่งต่อผู้ดูแล',
+                        list: false,
+                        create: false,
+                        edit: false,
+                        options: '@Url.Action("GetClaimStaffByPosition", "Home")'
+                    },
+                    kWorkingStatusId: {
+                        title: 'สถานะ',
+                        list: false,
+                        create: false,
+                        edit: false,
+                        options: '@Url.Action("GetClaimWorkingStatusByPosition","Home")'
+                    },
+                    vDateAdd: {
+                        title: 'วันรับสินค้า',
+                        create: false,
+                        edit: false
+                    },
+                    sSerial: {
+                        title: 'SN',
+                        create: false,
+                        edit: false,
+                        inputClass: 'validate[maxSize[50]]',
+                        list: false
+                    },
+                    dtInsuranceExpire: {
+                        title: 'วันหมดประกัน(ด/ว/ป)',
+                        displayFormat: 'mm/dd/yy',
+                        type: 'date',
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    IsNoCredit: {
+                        title: 'จ่ายสด',
+                        list: false,
+                        type: 'checkbox',
+                        values: { 'false': 'ไม่ใช่', 'true': 'ใช่' },
+                        defaultValue: 'false'
+                    },
+                    IsRecieved: {
+                        title: 'ตรวจรับสินค้า',
+                        list: false,
+                        type: 'checkbox',
+                        values: { 'false': 'ยังไม่ได้รับ', 'true': 'รับคืนสินค้า' },
+                        defaultValue: 'false'
+                    },
+                    ClaimStatus: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            //Create an image that will be used to open child table
+
+                            var $img = $('<img class="child-opener-image" src="/Images/hourglass.png" title="ประวัติสถานะการซ่อม/เครม" />');
+
+                            if (data.record.IsComplete == true) {
+                                $img = $('<img class="child-opener-image" src="/Images/tick.png" title="ประวัติสถานะการซ่อม/เครม" />');
+                            }
+//                            if (data.record.IsCancle == true) {
+//                                $img = $('<img class="child-opener-image" src="/Images/cross.png" title="ประวัติสถานะการซ่อม/เครม" />');
+//                            }
+
+                            // child table when user clicks the image
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: '[' + data.record.sClaimNo + ']  ' + 'หัวหน้างาน ' + data.record.vOwner,
+                                        actions: {
+                                            listAction: '@Url.Action("GetClaimStatus","Claim")?id=' + data.record.kClaimId
+                                        },
+                                        fields: {
+                                            vStaffName: {
+                                                title: 'ผู้ดูแล'
+                                            },
+                                            vWorkingStatus: {
+                                                title: 'สถานะ'
+                                            },
+                                            vWorkingDate: {
+                                                title: 'วันที่'
+                                            },
+                                            vWorkingTime: {
+                                                title: 'เวลา'
+                                            }
+                                        }
+                                    },
+                                    function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    },
+                    ChildData: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            //Create an image that will be used to open child table
+                            var $img = $('<img class="child-opener-image" src="/Images/phone.png" title="ข้อมูลอื่นๆ" />');
+                            // child table when user clicks the image
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                        $img.closest('tr'),
+                                        {
+                                            title: '[' + data.record.sClaimNo + ']  ' + 'หัวหน้างาน ' + data.record.vOwner,
+                                            actions: {
+                                                listAction: '@Url.Action("GetClaim", "Claim")?id=' + data.record.kClaimId
+                                            },
+                                            fields: {
+                                                kInsuranceId: {
+                                                    key: true,
+                                                    list: false
+                                                },
+                                                vCustomerDescription: {
+                                                    title: 'ข้อมูลลูกค้า',
+                                                    create: false,
+                                                    edit: false
+                                                },
+                                                kProductId: {
+                                                    key: true,
+                                                    list: false
+                                                },
+                                                vInsuranceDescription: {
+                                                    title: 'ข้อมูลบริษัทประกัน',
+                                                    create: false,
+                                                    edit: false
+                                                },
+                                                vProductDescription: {
+                                                    title: 'ข้อมูลสินค้า',
+                                                    create: false,
+                                                    edit: false
+                                                }
+                                            }
+                                        }, function (data) { //opened handler
+                                            data.childTable.jtable('load');
+                                        });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    },
+                    ClaimCause: {
+                        title: '',
+                        sorting: false,
+                        edit: false,
+                        create: false,
+                        listClass: 'child-opener-image-column',
+                        display: function (data) {
+                            //Create an image that will be used to open child table
+                            var $img = $('<img class="child-opener-image" src="/Images/36.png" title="บันทึกการซ่อม/เครม" />');
+                            // child table when user clicks the image
+                            $img.click(function () {
+                                $('#tbLists').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: 'บันทึกการซ่อม/เครม <a href="@Url.Action("Summary")?id=' + data.record.kClaimId + '"><img class="child-opener-image" src="/Images/12.png" title="พิมพ์ใบส่งเครม" /></a>',
+                                        actions: {
+                                            listAction: '@Url.Action("GetClaimCause", "Claim")?id=' + data.record.kClaimId,
+                                            //deleteAction: '@Url.Action("DeleteClaimCause", "Claim")',
+                                            //updateAction: '@Url.Action("EditClaimCause", "Claim")',
+                                            //createAction: '@Url.Action("CreateClaimCause", "Claim")'
+                                        },
+                                        fields: {
+                                            kClaimId: {
+                                                type: 'hidden',
+                                                defaultValue: data.record.kClaimId
+                                            },
+                                            kClaimCauseId: {
+                                                key: true,
+                                                create: false,
+                                                edit: false,
+                                                list: false
+                                            },
+                                            sDescription: {
+                                                title: 'การซ่อม',
+                                                inputClass: 'validate[required[maxSize[100]]]',
+                                                input: function (data) {
+
+                                                    var $img = $('<textarea name="sDescription" value="" />');
+                                                    if (data.record) {
+                                                        $img = $('<textarea name="sDescription">' + data.value + '</textarea>');
+                                                    }
+                                                    $img.autocomplete({
+                                                        source: '@Url.Action("Search2Prefix", "Cause")',
+                                                        minLength: 1,
+                                                        select: function (event, ui) {
+                                                            $img.val(ui.item.description);
+                                                        }
+                                                    });
+                                                    return $img;
+                                                }
+                                            },
+                                            iQty: {
+                                                title: 'จำนวน',
+                                                inputClass: 'validate[custom[number]]'
+                                            },
+                                            dPrice: {
+                                                title: 'ค่าบริการส่งซ่อม',
+                                                inputClass: 'validate[custom[number]]'
+                                            },
+                                            sNote: {
+                                                title: 'หมายเหตุ',
+                                                type: 'textarea',
+                                                inputClass: 'validate[required[maxSize[100]]]'
+                                            },
+                                            vWorkingDate: {
+                                                title: 'วันที่',
+                                                edit: false,
+                                                create: false
+                                            },
+                                            vWorkingTime: {
+                                                title: 'เวลา',
+                                                edit: false,
+                                                create: false
+                                            }
+                                        }
+                                    }, function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                            });
+                            //Return image to show on the person row
+                            return $img;
+                        }
+                    }
+                },
+                formCreated: function (event, data) {
+                    //not emplement yet
+                },
+                formSubmitting: function (event, data) {
+                    return data.form.validationEngine('validate');
+                },
+                formClosed: function (event, data) {
+                    data.form.validationEngine('hide');
+                    data.form.validationEngine('detach');
+                    $('#LoadRecordsButton').click();
+                }
+            });
+
+            //Re-load records when user click 'load records' button.
+            $('#LoadRecordsButton').click(function (e) {
+                e.preventDefault();
+                $('#tbLists').jtable('load', {
+                    jtSearching: $('#jtSearching').val(),
+                    jtStatus: $("#jtStatus option:selected").val()
+                });
+            });
+
+            //Load all records when page is first shown
+            $('#LoadRecordsButton').click();
+        }
+
+        //Create SignalR object to get communicate with server
+        var realTimeHub = $.connection.realTimeJTableDemoHub;
+
+        //Define a function to get 'record created' events
+        realTimeHub.RecordCreated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#tbLists').jtable('addRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+            loadNotes(true);
+
+            //writeEvent(clientName + ' ' + record.vMessage, 'event-created');
+        };
+
+        //Define a function to get 'record updated' events
+        realTimeHub.RecordUpdated = function (clientName, record) {
+            if (clientName != myClientName) {
+                $('#tbLists').jtable('updateRecord', {
+                    record: record,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' ' + record.vMessage, 'event-updated');
+        };
+
+        //Define a function to get 'record deleted' events
+        realTimeHub.RecordDeleted = function (clientName, recordId) {
+            if (clientName != myClientName) {
+                $('#tbLists').jtable('deleteRecord', {
+                    key: recordId,
+                    clientOnly: true
+                });
+            }
+
+            writeEvent(clientName + ' <b>ลบ</b> ' + recordId, 'event-deleted');
+        };
+
+        //Define a function to get 'chat messages'
+        realTimeHub.GetMessage = function (clientName, message) {
+            writeEvent('<b>' + clientName + '</b> sent: ' + message, 'event-message');
+        };
+
+        $('#Message').keydown(function (e) {
+            if (e.which == 13) { //Enter
+                e.preventDefault();
+                realTimeHub.sendMessage(myClientName, $('#Message').val());
+                $('#Message').val('');
+            }
+        });
+
+        // Start the connection with server
+        $.connection.hub.start();
+
+        //A function to write events to the page
+        function writeEvent(eventLog, logClass) {
+            var now = new Date();
+            var nowStr = now.getHours() + ':' + now.getMinutes();
+            $('#EventsList').prepend('<ul class="' + logClass + '"><b>' + nowStr + '</b></a>: ' + eventLog + '</ul><hr/>');
+        }
+    });
+
+</script>
+</div>
+</div>
+</div>

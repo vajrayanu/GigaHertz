@@ -1,0 +1,62 @@
+﻿
+
+
+@if (Request.IsAuthenticated)
+{
+    var role = Roles.GetRolesForUser();
+    
+    <div id="sidebar">
+        @if ((!Request.Url.AbsoluteUri.Contains("Create") && !Request.Url.AbsoluteUri.Contains("Edit") && !Request.Url.AbsoluteUri.Contains("Summary")) && (Request.Url.AbsoluteUri.Contains("Repair") || Request.Url.AbsoluteUri.Contains("Claim")))
+        {
+            <div style="width:250px;display:inline-block">
+            @Html.Partial("_Wall")
+            </div>
+            <div class="block notice">
+            </div>
+            @*<iframe class="info"  src="@Url.Action("Index","Remind")"></iframe>*@
+        }
+        else if (Request.Url.AbsoluteUri.Contains("AppSetting")
+            || Request.Url.AbsoluteUri.Contains("Brand")
+            || Request.Url.AbsoluteUri.Contains("Cause")
+            || Request.Url.AbsoluteUri.Contains("Color")
+            || Request.Url.AbsoluteUri.Contains("Customer")
+            || Request.Url.AbsoluteUri.Contains("Insurance")
+            || Request.Url.AbsoluteUri.Contains("Product")
+            || Request.Url.AbsoluteUri.Contains("ProductAccessorie")
+            || Request.Url.AbsoluteUri.Contains("ProductType")
+            || Request.Url.AbsoluteUri.Contains("Staff"))
+        {
+            <div class="block">
+            <ul class="navigation">
+            
+                @if (role.SingleOrDefault().Equals("Admin"))
+                {
+                    <li>@Html.ActionLink("โปรแกรม", "Index", "AppSetting")</li>
+                }  
+               
+                <li>@Html.ActionLink("ข้อมูลผู้ใช้", "UserProfile", "AppSetting")</li>
+                <li>@Html.ActionLink("รหัสผ่าน", "UserPassword", "AppSetting")</li>
+
+                @if (role.SingleOrDefault().Equals("Admin"))
+                {
+                    <li>@Html.ActionLink("พนักงาน", "Index", "Staff")</li>
+                }             
+
+                @if (role.SingleOrDefault().Equals("Admin") || role.SingleOrDefault().Equals("SuperUser"))
+                {
+                    <li>@Html.ActionLink("ลูกค้า", "Index", "Customer")</li>
+                    <li>@Html.ActionLink("ศูนย์ประกัน", "Index", "Insurance")</li>
+                    @*<li>@Html.ActionLink("สถานะการซ่อม/เครม", "Index", "WorkingStatus")</li>*@
+                    <li>@Html.ActionLink("ประเภทสินค้า", "Index", "ProductType")</li>
+                    <li>@Html.ActionLink("สินค้า", "Index", "Product")</li>
+                    <li>@Html.ActionLink("อาการ", "Index", "Cause")</li> 
+                    <li>@Html.ActionLink("อุปกรณ์", "Index", "ProductAccessorie")</li>
+                    <li>@Html.ActionLink("ยี่ห้อ", "Index", "Brand")</li>
+                    <li>@Html.ActionLink("สี", "Index", "Color")</li>
+                    @*<li>@Html.ActionLink("บริษัทขนส่ง", "Index", "Transport")</li>*@
+                }
+            </ul>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,205 @@
+﻿
+@model GH.Web.Models.ReportServiceDayViewModel
+<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th2.js")"></script>
+<script src="@Url.Content("~/Scripts/datepicker/jquery-ui-1.8.10.offset.datepicker.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $(function () {
+        var d = new Date();
+        var toDay = (d.getMonth() + 1) + '/' + d.getDate() + '/' + (d.getFullYear() + 543);
+
+        $("#DateStart").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        });
+
+        $("#DateEnd").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        });
+    });
+});
+
+function Print() {
+
+    var printContents = document.getElementById("printContent").innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+
+</script>
+
+
+
+@using (Html.BeginForm())
+{
+    if (Model.Report != null)
+    {
+        <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DateStart, new { @class = "label" })
+            </td>
+            <td>
+                @Html.LabelFor(model => model.DateEnd, new { @class = "label" })
+            </td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>
+                @Html.TextBox("DateStart", Model.DateStart.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                @Html.TextBox("DateEnd", Model.DateEnd.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                <button type="submit" id="LoadRecordsButton" class="buttonStyle">สร้างรายงาน</button>
+                <button type="button" id="print" class="buttonStyle" onclick="Print();">พิมพ์</button>
+            </td>
+        </tr>
+    </table>    
+        if (Model.Report.Repairs.Count > 0)
+        {
+            <div id="printContent">
+            <style>
+                .tb1 tr td
+                {
+    	            /*border:1px solid #cccccc;#CFCDC9*/
+                    font-size:1.2em;
+                    border: solid 1px #CFCDC9;
+                    border-collapse: collapse;
+                    white-space: nowrap;
+                }
+                .tb1 tr td p
+                {
+    	           text-decoration:underline;
+    	           border-collapse: collapse;
+    	           font-weight:bold;
+                }
+                .tb1 tr td.header
+                {
+    	            font-weight:bold;
+    	            font-size:1.8em;
+    	            text-align:center;
+                }
+                .tb1 tr td.subheader
+                {
+    	            font-size:1.2em;
+    	            padding-top:10px;
+                }
+                .tb1 tr td.subheader2
+                {
+    	            padding-left:120px;
+                }
+                .tb1 tr.subheader3
+                {
+    	            font-size:1.2em;
+    	            padding-left:250px;
+                }
+               
+            </style>
+            <table class="tb1">
+                <tr>
+                    <td class="header" colspan="10">@ViewBag.ReportHeader</td>
+                </tr>
+                <tr>
+                    <td>ลำดับ</td>
+                    <td>วันที่รับ</td>
+                    <td>เลขที่</td>
+                    <td>รับ</td>
+                    <td>บริการซ่อม</td>
+                    <td>ยกเลิก</td>
+                    <td>แจ้งลูกค้า</td>
+                    <td>ลูกค้ารับไปแล้ว</td>
+                   @* <td>จ่าย(สด)</td>
+                    <td>จ่าย(เชื่อ)</td>*@
+                </tr>
+                @{ int RowNum = 0; }
+                @foreach (var item in Model.Report.Repairs.OrderByDescending(m=>m.sRepairNo))
+                {
+                    RowNum++;
+                    <tr >
+                        <td >@Html.Encode(RowNum)</td>
+                        <td >@Html.Encode(item.vDateAdd)</td>
+                        <td >@Html.Encode(item.sRepairNo)</td>
+                        <td >
+                            @if (item.dtDateAdd.Value.DayOfYear.CompareTo(Model.DateStart.DayOfYear) == 0)
+                            {
+                                @Html.Label("X")
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.IsCustomerRecieved != true)
+                            {
+                                @Html.Label("X")
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.kCloseStatusId.ToString().ToUpper().Equals("49CBC40D-310A-4E09-AC4C-8934C5A0F900"))
+                            {
+                                @Html.Label("X")
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.iRemind > 0)
+                            {
+                                @Html.Label("X")
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                        <td >
+                            @if (item.IsCustomerRecieved == true)
+                            {
+                                @Html.Label("X")
+                            }
+                            else
+                            {
+                                @Html.Label(" ")
+                            }
+                        </td>
+                    </tr>
+                }     
+                <tr>
+                    <td colspan="3">รวม</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.dtDateAdd.Value.DayOfYear.CompareTo(Model.DateStart.DayOfYear) == 0).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsCustomerRecieved != true).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.kCloseStatusId.ToString().ToUpper().Equals("49CBC40D-310A-4E09-AC4C-8934C5A0F900")).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.iRemind > 0).ToList().Count)</td>
+                    <td > @Html.Encode(Model.Report.Repairs.Where(m => m.IsCustomerRecieved == true || m.IsCancle == true).ToList().Count)</td>
+                </tr>
+            </table>
+            </div>
+        }
+    }
+    else
+    {
+        @Html.Label("ไม่พบข้อมูล!")
+    }
+}
+
+   
+
+  
+

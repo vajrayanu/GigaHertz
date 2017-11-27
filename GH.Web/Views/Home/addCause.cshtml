@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "addCause";
+}
+@model GH.Web.Models.BookingViewModel
+<script type="text/javascript" src="../../Scripts/jquery-1.6.2.js"></script>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.11/jquery-ui.min.js" type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+
+<input type="text" id="jtSearchingCustomer" name="jtSearchingCustomer" placeholder="ค้นหา..." class="textBoxStyle" />
+<button id="add">Add</button>
+<button type="submit" id="LoadRecordsButton" class="buttonStyle" style="display:none"></button>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(function () {
+            $('#jtSearchingCustomer').autocomplete({
+                source: '@Url.Action("Search", "Customer")',
+                minLength: 1,
+                select: function (event, ui) {
+                    //$('#Customer_kCustomerId').val(ui.item.value);
+                    CustomerData(ui.item.value);
+                    //return false;
+                }
+            });
+        });
+
+
+
+
+    });
+
+    function CustomerData(name) {
+        $.getJSON(
+            '@Url.Action("GetByName", "Customer")', { Name: name },
+            function (data) {
+                $('#Customer_kCustomerId').val(data.kCustomerId);
+                $('#Customer_sCustomerName').val(data.sCustomerName);
+                $('#Customer_sZip').val(data.sZip);
+            }
+        );
+    }
+
+</script>
+
+<div class="group wat-cf">
+	<div class="left">
+		@Html.LabelFor(model => model.Customer.sCustomerName, new { @class = "label" })
+	</div>
+	<div class="right">
+		@Html.TextBoxFor(model => model.Customer.sCustomerName, new { @class = "textBoxStyle" })
+		@Html.ValidationMessageFor(model => model.Customer.sCustomerName)
+         @Html.TextBoxFor(model => model.Customer.kCustomerId, new { @Value = Guid.NewGuid(), @Style = "display:none" })
+	</div>
+</div>
+<div class="group wat-cf">
+	<div class="left">
+		@Html.LabelFor(model => model.Customer.sZip, new { @class = "label" })
+	</div>
+	<div class="right">
+		@Html.TextAreaFor(model => model.Customer.sZip, new { @class = "textBoxStyle" })
+		@Html.ValidationMessageFor(model => model.Customer.sZip)
+	</div>
+</div>
+
+<input type="text" id="demo-input-custom-labels" name="q" />

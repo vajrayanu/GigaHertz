@@ -1,0 +1,136 @@
+﻿@model GH.Web.Models.BookingRepairViewModel
+         
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(function () {
+            $('#jtSearchingCustomer').autocomplete({
+                source: '@Url.Action("Search2", "Customer")',
+                minLength: 1,
+                select: function (event, ui) {
+                    $('#Repair_kCustomerId').val(ui.item.kCustomerId);
+                    
+                    $('#Customer_sCustomerName').val(ui.item.sCustomerName);
+                    $('#Customer_sAddress1').val(ui.item.sAddress1);
+                    $('#Customer_sCity').val(ui.item.sCity);
+                    $('#Customer_sZip').val(ui.item.sZip);
+                    $('#Customer_sPhone').val(ui.item.sPhone);
+                    $('#Customer_sMobile').val(ui.item.sMobile);
+                    $('#Customer_sFax').val(ui.item.sFax);
+                    $('#Customer_sEmailAddress').val(ui.item.sEmailAddress);
+                }
+            });
+        });
+    });
+
+    function CustomerClear() {
+        $('#jtSearchingCustomer').val('');
+        $('#Repair_kCustomerId').val('');
+
+        $('#Customer_sCustomerName').val('');
+        $('#Customer_sAddress1').val('');
+        $('#Customer_sCity').val('');
+        $('#Customer_sZip').val('');
+        $('#Customer_sPhone').val('');
+        $('#Customer_sMobile').val('');
+        $('#Customer_sFax').val('');
+        $('#Customer_sEmailAddress').val('');
+    }
+</script>
+
+
+
+<table cellspacing="20">
+    <tr>
+        <td>
+            <div class="group wat-cf">
+                <input type="text" id="jtSearchingCustomer" name="jtSearchingCustomer" placeholder="ค้นหา..." class="textBoxStyle" />
+                <button type="submit" id="LoadRecordsButton" class="buttonStyle" style="display:none"></button>
+                @Html.TextBoxFor(model => model.Repair.kCustomerId, new { @Style = "display:none" })
+            </div>
+        </td>
+        <td>
+             <input type="button" class="buttonStyle" onclick="CustomerClear();" value="Clear" />
+        </td>
+    </tr>
+    <tr style="vertical-align:top;">
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sCustomerName, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Customer.sCustomerName, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sPhone, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Customer.sPhone, new { @class = "textBoxStyle validate[custom[phone]]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sMobile, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Customer.sMobile, new { @class = "textBoxStyle validate[custom[phone]]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sFax, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Customer.sFax, new { @class = "textBoxStyle validate[custom[phone]]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sEmailAddress, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Customer.sEmailAddress, new { @class = "textBoxStyle validate[custom[email]]" })
+	            </div>
+            </div>
+        </td>
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sAddress1, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextAreaFor(model => model.Customer.sAddress1, new { @class = "textAreaStyle" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sCity, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Customer.sCity, new { @class = "textBoxStyle" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Customer.sZip, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Customer.sZip, new { @class = "textBoxStyle validate[custom[integer]]" })
+	            </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+    
+
+
+    
+    
+    
+    
+    

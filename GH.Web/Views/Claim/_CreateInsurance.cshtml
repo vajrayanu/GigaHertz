@@ -1,0 +1,134 @@
+﻿@model GH.Web.Models.BookingClaimViewModel
+         
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(function () {
+            $('#jtSearchingInsurance').autocomplete({
+                source: '@Url.Action("Search2", "Insurance")',
+                minLength: 1,
+                select: function (event, ui) {
+                    $('#Claim_kInsuranceId').val(ui.item.kInsuranceId);
+                    $('#Insurance_sInsuranceName').val(ui.item.sInsuranceName);
+                    $('#Insurance_sAddress1').val(ui.item.sAddress1);
+                    $('#Insurance_sCity').val(ui.item.sCity);
+                    $('#Insurance_sZip').val(ui.item.sZip);
+                    $('#Insurance_sPhone').val(ui.item.sPhone);
+                    $('#Insurance_sMobile').val(ui.item.sMobile);
+                    $('#Insurance_sFax').val(ui.item.sFax);
+                    $('#Insurance_sEmailAddress').val(ui.item.sEmailAddress);
+                }
+            });
+        });
+    });
+
+    function InsuranceClear() {
+        $('#jtSearchingInsurance').val('');
+        $('#Claim_kInsuranceId').val('');
+        $('#Insurance_sInsuranceName').val('');
+        $('#Insurance_sAddress1').val('');
+        $('#Insurance_sCity').val('');
+        $('#Insurance_sZip').val('');
+        $('#Insurance_sPhone').val('');
+        $('#Insurance_sMobile').val('');
+        $('#Insurance_sFax').val('');
+        $('#Insurance_sEmailAddress').val('');
+    }
+</script>
+
+
+
+<table cellspacing="20">
+    <tr>
+        <td>
+            <div class="group wat-cf">
+                <input type="text" id="jtSearchingInsurance" name="jtSearchingInsurance" placeholder="ค้นหา..." class="textBoxStyle" />
+                <button type="submit" id="LoadRecordsButton" class="buttonStyle" style="display:none"></button>
+                @Html.TextBoxFor(model => model.Claim.kInsuranceId, new { @Value = Guid.NewGuid(), @Style = "display:none" })
+            </div>
+        </td>
+        <td>
+             <input type="button" class="buttonStyle" onclick="InsuranceClear();" value="Clear" />
+        </td>
+    </tr>
+    <tr style="vertical-align:top;">
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sInsuranceName, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Insurance.sInsuranceName, new { @class = "textBoxStyle validate[required]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sPhone, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Insurance.sPhone, new { @class = "textBoxStyle validate[custom[phone]]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sMobile, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Insurance.sMobile, new { @class = "textBoxStyle validate[custom[phone]]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sFax, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Insurance.sFax, new { @class = "textBoxStyle validate[custom[phone]]" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sEmailAddress, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Insurance.sEmailAddress, new { @class = "textBoxStyle validate[custom[email]]" })
+	            </div>
+            </div>
+        </td>
+        <td>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sAddress1, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextAreaFor(model => model.Insurance.sAddress1, new { @class = "textAreaStyle" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sCity, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Insurance.sCity, new { @class = "textBoxStyle" })
+	            </div>
+            </div>
+            <div class="group wat-cf">
+	            <div class="left">
+		            @Html.LabelFor(model => model.Insurance.sZip, new { @class = "label" })
+	            </div>
+	            <div class="right">
+		            @Html.TextBoxFor(model => model.Insurance.sZip, new { @class = "textBoxStyle validate[custom[integer]]" })
+	            </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+    
+
+
+    
+    
+    
+    
+    

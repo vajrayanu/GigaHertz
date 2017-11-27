@@ -1,0 +1,208 @@
+﻿@{
+    Layout = null;
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/wall/header.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/wall/date.format.js")"></script>
+<link href="@Href("~/Scripts/wall/walls2.css")" rel="stylesheet" type="text/css" />
+<div class="panel">
+    <header>
+        <div>
+            <textarea name="content" id="content" class="note-textarea" placeholder="พิมพ์ข้อความ" cols="20" rows="1" maxlength="40"  ></textarea>
+        </div>
+        <img id="loaderAnim" style="display:none" alt="loading..." src="@Url.Content("~/images/loading.gif")" />
+        <p></p>
+    </header>
+    <div id="flash" class="loader"></div>
+    <ol id="update" class="timeline">
+    </ol>
+    <a href="#" style="display:none" id="loadOlder">more</a>
+</div>
+<div style="display:none">
+<div id="error-message" title="Warning"></div>
+<div id="confirm-msg" title="Delete all notes?">
+<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
+<div id="edit-popup" title="Edit"></div>
+</div>
+
+
+<script type="text/javascript">
+
+    var threadId = 1;
+    var date = new Date();
+    var searchMode = false;
+    var defaultCount = 9;
+
+    $(document).ready(function () {
+        //show specific menu
+        showMainMenu(false, true, true);
+
+        //load data
+        loadNotes(true);
+    });
+
+    //post note with wnter at textarea
+    $(function () {
+        $('.note-textarea').keydown(function (e) {
+               if (e.which == 13) { //Enter
+
+                    e.preventDefault();
+                    var boxval = $("#content").val();
+                    var dataString = 'content=' + boxval;
+                    if (!boxval) {
+                        showError("Can't post an empty note");
+                    }
+                    else {
+                    //showLoader('Saving');
+
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("PostNote", "Remind")",
+                        data: dataString,
+                        cache: false,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Message) {
+                                $("#flash").hide();
+                                showError(data.Message);
+                            } else {
+//                                $("ol#update").prepend(data.Html);
+//                                $("ol#update li:first").slideDown("slow");
+                                document.getElementById('content').value = '';
+                                $("#flash").hide();
+                                date = new Date();
+                            }
+                        }
+                    });
+                }
+                return false;
+            }
+        });
+    });
+
+   //load more results
+    $(function () {
+        $("#loadOlder").click(function (e) {
+            e.preventDefault();
+
+            //find oldest id displayed
+            var Id = $("ol#update li.item:last");
+            if (Id[0]) {
+                Id = Id.attr("id").replace("bar-", "");
+            } else {
+                Id = 0;
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetOlderNotes", "Remind")",
+                data: { id: Id, count: defaultCount },
+                cache: false,
+                dataType: "json",
+                success: function (data) {
+                    date = new Date();
+                    if (data.Html) {
+                        $("ol#update").append(data.Html);
+                        $("ol#update li").slideDown("slow");
+                        if (!data.IsMore) {
+                            //hide loader if there are no more notes
+                            $("#loadOlder").hide();
+                        }
+                    } else {
+                        showError(data.Message);
+                    }
+                    $("#loaderAnim").hide();
+                }
+            });
+            
+            return false;
+        });
+    });
+
+    //load all notes or latest
+    function loadNotes(all) {
+        if (all) {
+            showLoader('Loading records');
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetNotes", "Remind")",
+                data: { count: defaultCount },
+                cache: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.Message) {
+                        $("#flash").hide();
+                        showError(data.Message);
+                    }
+                    else if (data.Html) {
+                        $("ol#update").html(data.Html);
+                        $("ol#update li").slideDown("slow");
+                        if (data.IsMore) {
+                            $("ol#footer li").slideDown("slow");
+                            $("#loadOlder").show();
+                        } else {
+                            $("#loadOlder").hide();
+                        }
+                        $("#flash").hide();
+                    } else { $("#flash").hide(); }
+                }
+            });
+        } 
+        else 
+        {
+            //sync notes with other sessions
+            $("#loaderAnim").show();
+            var Id = $("ol#update li:first");
+            if (Id[0]) { //get last inserted id on this session 
+                Id = Id.attr("id").replace("bar-", "");
+            } else {
+                Id = 0;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetLatestNotes", "Remind")",
+                data: { lastDate: dateFormat(date, 'isoUtcDateTime') },
+                cache: false,
+                dataType: "json",
+                success: function (data) {
+                    if(data.IsNew)
+                    {
+                        date = new Date();
+                        if (data.Html) { //show latest notes
+                            $("ol#update").prepend(data.Html);
+                            $("ol#update li").slideDown("slow");
+                        }
+                    }
+                    $("#loaderAnim").hide();
+                },
+                error: function () {
+                    //stop thread - server is offline
+                    clearInterval(threadId);
+                    $("#loaderAnim").hide();
+                }
+            });
+        }
+    };//end load
+
+    function showLoader(txt) {
+        $("#flash").show();
+        var loader = '<img src="@Url.Content("~/images/loading.gif")" align="absmiddle">&nbsp;<span class="loading">' + txt + '...</span>';
+        $("#flash").fadeIn(400).html(loader);
+    };
+
+    function showError(messsage) {
+        $("#error-message").html(messsage);
+        $("#error-message").dialog({
+            modal: true,
+            buttons: {
+                Ok: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    };
+
+</script>
+
+

@@ -1,0 +1,101 @@
+﻿@model GH.Web.Models.ApplicationHeaderViewModel
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#form").validationEngine('attach');
+    });
+    
+</script>
+<style>
+.form div.left {
+    float: left;
+    text-align:right;
+    width: 10%;
+}
+</style>         
+<div id="block-tables" class="block">
+<div class="content">
+<div class="inner">
+           
+@using (Html.BeginForm("UserProfile", "AppSetting", FormMethod.Post, new {@class = "form", @id = "form" }))
+{
+     @Html.HiddenFor(model => model.Staff.kStaffId)
+
+	<div class="group wat-cf">
+		<div class="left">
+            @Html.LabelFor(model => model.Staff.sStaffName)
+		</div>
+        <div class="right">
+            @Html.TextBoxFor(model => model.Staff.sStaffName, new { @class = "textBoxStyle validate[required]" })
+		</div>
+    </div>
+
+	<div class="group wat-cf">
+		<div class="left">
+            @Html.LabelFor(model => model.Staff.sAddress1)
+		</div>
+        <div class="right">
+            @Html.TextAreaFor(model => model.Staff.sAddress1, new { @class = "textAreaStyle" })
+		</div>
+    </div>
+
+	<div class="group wat-cf">
+		<div class="left">
+            @Html.LabelFor(model => model.Staff.sCity)
+		</div>
+        <div class="right">
+            @Html.TextBoxFor(model => model.Staff.sCity, new { @class = "textBoxStyle" })
+		</div>
+    </div>
+
+	<div class="group wat-cf">
+		<div class="left">
+            @Html.LabelFor(model => model.Staff.sZip)
+		</div>
+        <div class="right">
+            @Html.TextBoxFor(model => model.Staff.sZip, new { @class = "textBoxStyle validate[custom[integer]]" })
+		</div>
+    </div>
+
+	<div class="group wat-cf">
+		<div class="left">
+            @Html.LabelFor(model => model.Staff.sPhone)
+		</div>
+        <div class="right">
+            @Html.TextBoxFor(model => model.Staff.sPhone, new { @class = "textBoxStyle validate[custom[phone]]" })
+		</div>
+    </div>
+
+	<div class="group wat-cf">
+		<div class="left">
+            @Html.LabelFor(model => model.Staff.sMobile)
+		</div>
+        <div class="right">
+            @Html.TextBoxFor(model => model.Staff.sMobile, new { @class = "textBoxStyle validate[custom[phone]]" })
+		</div>
+    </div>
+
+	<div class="group wat-cf">
+		<div class="left">
+            @Html.LabelFor(model => model.Staff.sEmailAddress)
+		</div>
+        <div class="right">
+            @Html.TextBoxFor(model => model.Staff.sEmailAddress, new { @class = "textBoxStyle validate[custom[email][required]]" })
+		</div>
+    </div>
+    <div class="group navform wat-cf">
+		<div class="right">
+			<button class="button" type="submit">
+			<img src="@Url.Content("~/images/icons/tick.png")" alt="Save" />
+			Save
+			</button>
+           <p>@Html.ValidationMessage("UserProfile")</p>
+		</div>
+	</div>
+           
+}
+
+</div>
+</div>
+</div>

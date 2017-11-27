@@ -1,0 +1,224 @@
+﻿
+@model GH.Web.Models.ReportMonthViewModel
+<script type="text/javascript" src="@Url.Content("~/Scripts/datepicker/ui.datepicker-th2.js")"></script>
+<script src="@Url.Content("~/Scripts/datepicker/jquery-ui-1.8.10.offset.datepicker.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $(function () {
+        var d = new Date();
+        var toDay = (d.getMonth() + 1) + '/' + d.getDate() + '/' + (d.getFullYear() + 543);
+
+        $("#DateStart").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        });
+
+        $("#DateEnd").datepicker({ dateFormat: 'mm/dd/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        });
+    });
+});
+
+function Print() {
+
+    var printContents = document.getElementById("printContent").innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+
+</script>
+
+
+
+@using (Html.BeginForm())
+{
+    if (Model.Report != null)
+    {
+        <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DateStart, new { @class = "label" })
+            </td>
+            <td>
+                @Html.LabelFor(model => model.DateEnd, new { @class = "label" })
+            </td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>
+                @Html.TextBox("DateStart", Model.DateStart.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                @Html.TextBox("DateEnd", Model.DateEnd.ToString("MM/dd/yyyy"), new { @class = "textBoxStyle validate[required]" })
+            </td>
+            <td>
+                <button type="submit" id="LoadRecordsButton" class="buttonStyle">สร้างรายงาน</button>
+                <button type="button" id="print" class="buttonStyle" onclick="Print();">พิมพ์</button>
+            </td>
+        </tr>
+    </table>    
+        if (Model.Report.Repairs.Count > 0)
+        {
+            <div id="printContent">
+            <style>
+                .tb1 tr td
+                {
+    	            /*border:1px solid #cccccc;#CFCDC9*/
+                    font-size:1.2em;
+                    border: solid 1px #CFCDC9;
+                    border-collapse: collapse;
+                    white-space: nowrap;
+                }
+                .tb1 tr td p
+                {
+    	           text-decoration:underline;
+    	           border-collapse: collapse;
+    	           font-weight:bold;
+                }
+                .tb1 tr td.header
+                {
+    	            font-weight:bold;
+    	            font-size:1.8em;
+    	            text-align:center;
+                }
+                .tb1 tr td.subheader
+                {
+    	            font-size:1.2em;
+    	            padding-top:10px;
+                }
+                .tb1 tr td.subheader2
+                {
+    	            padding-left:120px;
+                }
+                .tb1 tr.subheader3
+                {
+    	            font-size:1.2em;
+    	            padding-left:250px;
+                }
+               
+            </style>
+            <table class="tb1">
+                <tr>
+                    <td class="header" colspan="2">@ViewBag.ReportHeader</td>
+                </tr>
+                <tr class="subheader">
+                    <td>@Html.LabelFor(m => m.Report.TotalMachine)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachine)</td>
+                </tr>
+                <tr class="subheader">
+                    <td>@Html.LabelFor(m => m.Report.TotalMachineComplete)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachineComplete)</td>
+                </tr>
+                <tr class="subheader">
+                    <td colspan="2">จำนวนเครื่องซ่อมแบ่งตามประเภท</td>
+                </tr>
+                <tr >
+                    <td class="subheader2">@Html.LabelFor(m => m.Report.TotalMachineNormal)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachineNormal)</td>
+                </tr>
+                <tr >
+                    <td class="subheader2">@Html.LabelFor(m => m.Report.TortalMachineBack)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TortalMachineBack)</td>
+                </tr>
+                <tr>
+                    <td class="subheader2">@Html.LabelFor(m => m.Report.TotalMachineCancle)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachineCancle)</td>
+                </tr>
+                <tr>
+                    <td class="subheader2">@Html.LabelFor(m => m.Report.TotalMachineHasInsurance)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachineHasInsurance)</td>
+                </tr>
+                <tr>
+                    <td class="subheader2">@Html.LabelFor(m => m.Report.TotalMachineServiceFree)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachineServiceFree)</td>
+                </tr>
+                <tr>
+                    <td class="subheader2">@Html.LabelFor(m => m.Report.TotalMachineServiceFees)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachineServiceFees)</td>
+                </tr>
+                 <tr>
+                    <td class="subheader2">@Html.LabelFor(m => m.Report.TotalMachineHpOnSite)</td>
+                    <td>@Html.DisplayTextFor(m => m.Report.TotalMachineHpOnSite)</td>
+                </tr>
+                <tr class="subheader">
+                    <td colspan="2">บริการซ่อมอยู่ในประกัน</td>
+                </tr>
+                @{int totalClaim = 0;}
+                @foreach (var ins in Model.Insurances.OrderBy(m => m.sInsuranceName))
+                {
+                    <tr>
+                    <td class="subheader2">@Html.Label(ins.sInsuranceName)</td>
+                    <td> 
+                    @{
+                        int countClaim = 0;
+                    
+                        foreach (var item in Model.Report.Repairs)
+                        {
+                            if (item.Claim != null)
+                            {
+                            
+                                if (item.Claim.kInsuranceId == ins.kInsuranceId)
+                                {
+                                    totalClaim++;
+                                    countClaim++;
+                                }
+                            }
+                        }
+                    }
+                    @Html.Label(countClaim.ToString())
+                    </td>
+                    </tr>
+                }
+                <tr>
+                    <td class="subheader2"><p>รวม</p></td><td>@Html.Label(totalClaim.ToString())</td>
+                </tr>
+                <tr class="subheader">
+                    <td colspan="2">ค่าบริการศูนย์</td>
+                </tr>
+                @{Decimal totalPrice = 0;}
+                @foreach (var ins in Model.Insurances.OrderBy(m => m.sInsuranceName))
+                {
+                    <tr>
+                        <td class="subheader2">@Html.Label(ins.sInsuranceName)</td>
+                    <td> 
+                    @{
+                    Decimal sumPrice = 0;
+                    foreach (var item in Model.Report.Repairs)
+                    {
+                        if (item.Claim != null)
+                        {
+                            if (item.Claim.kInsuranceId == ins.kInsuranceId)
+                            {
+                                sumPrice += item.Claim.ClaimCauses.Sum(m => m.dPrice).Value;
+                                totalPrice += item.Claim.ClaimCauses.Sum(m => m.dPrice).Value;
+                            }
+                        }
+                    }
+                    }
+                    @Html.Label(string.Format("{0:0,0}", sumPrice))
+                    </td>
+                    </tr>
+                }
+                <tr><td class="subheader2"><p>รวม</p></td><td>@Html.Label(string.Format("{0:0,0}", totalPrice))</td></tr>
+            </table>
+            </div>
+        }
+    }
+    else
+    {
+        @Html.Label("ไม่พบข้อมูล!")
+    }
+}
+
+   
+
+  
+

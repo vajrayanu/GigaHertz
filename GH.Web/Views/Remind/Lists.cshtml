@@ -1,0 +1,21 @@
+﻿@model IEnumerable<GH.DAL.Model.RemindHistory>
+@using GH.Web.Helpers
+@foreach (var item in Model)
+{
+<li id="bar-@item.kRemindHistoryId" class="item">
+    @*<aside>
+        <a href="#" title="Delete" class="del-note" id="@item.kRemindHistoryId"><span class="ui-icon ui-icon-trash" style="float:right; margin-right:10px;"></span></a>
+        <a href="#" title="Edit" class="edit-note" id="edit-@item.kRemindHistoryId"><span class="ui-icon ui-icon-pencil" style="float:right; margin-right:1px;"></span></a>
+        <a href="#" title="Mail" class="mail-note" id="mail-@item.kRemindHistoryId"><span class="ui-icon ui-icon-comment" style="float:right; margin-right:1px;"></span></a>
+    </aside>*@
+    @*<img src="@Url.Content("~/Images/loading.gif")"  />*@
+    
+    <p>
+        <b>@MvcHtmlString.Create(@item.Staff.sStaffName.Prep())</b>
+        @MvcHtmlString.Create(@item.sRemind.Prep())
+    </p>
+    <footer>
+        @item.vDateAdd 
+    </footer>
+</li>
+}
