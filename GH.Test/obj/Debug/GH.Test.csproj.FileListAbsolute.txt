@@ -1,0 +1,256 @@
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.Test.dll.config
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.Test.dll
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.Test.pdb
+D:\Development\Gigahertz\GH.Test\bin\Debug\EntityFramework.dll
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.DAL.dll
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.Memberships.dll
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.Web.dll
+D:\Development\Gigahertz\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Development\Gigahertz\GH.Test\bin\Debug\SignalR.dll
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.DAL.pdb
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.Memberships.pdb
+D:\Development\Gigahertz\GH.Test\bin\Debug\GH.Web.pdb
+D:\Development\Gigahertz\GH.Test\bin\Debug\EntityFramework.xml
+D:\Development\Gigahertz\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\Development\Gigahertz\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+D:\Development\Gigahertz\GH.Test\obj\Debug\GH.Test.dll
+D:\Development\Gigahertz\GH.Test\obj\Debug\GH.Test.pdb
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.Test.dll.config
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.Test.dll
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.Test.pdb
+D:\Development\Gigahertz3\GH.Test\bin\Debug\EntityFramework.dll
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.DAL.dll
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.Memberships.dll
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.Web.dll
+D:\Development\Gigahertz3\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Development\Gigahertz3\GH.Test\bin\Debug\SignalR.dll
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.DAL.pdb
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.Memberships.pdb
+D:\Development\Gigahertz3\GH.Test\bin\Debug\GH.Web.pdb
+D:\Development\Gigahertz3\GH.Test\bin\Debug\EntityFramework.xml
+D:\Development\Gigahertz3\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\Development\Gigahertz3\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+D:\Development\Gigahertz3\GH.Test\obj\Debug\GH.Test.dll
+D:\Development\Gigahertz3\GH.Test\obj\Debug\GH.Test.pdb
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+G:\bg+gh\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+G:\bg+gh\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+G:\bg+gh\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+G:\bg+gh\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+G:\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+G:\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+G:\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+G:\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+G:\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+G:\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+G:\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+G:\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+G:\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+G:\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+G:\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+G:\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+G:\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+G:\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+G:\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+G:\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+G:\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\1\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\ghz\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\ghz\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\mon\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\xxx\mon\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Admin\Desktop\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Administrator\Desktop\April_08\mon_1\m\ghz_1\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+C:\Documents and Settings\Watchara\My Documents\Downloads\Compressed\gigahertz_source\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+D:\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll.config
+D:\gigahertz_source\GH.Test\bin\Debug\GH.Test.dll
+D:\gigahertz_source\GH.Test\bin\Debug\GH.Test.pdb
+D:\gigahertz_source\GH.Test\bin\Debug\EntityFramework.dll
+D:\gigahertz_source\GH.Test\bin\Debug\GH.DAL.dll
+D:\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.dll
+D:\gigahertz_source\GH.Test\bin\Debug\GH.Web.dll
+D:\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\gigahertz_source\GH.Test\bin\Debug\SignalR.dll
+D:\gigahertz_source\GH.Test\bin\Debug\GH.DAL.pdb
+D:\gigahertz_source\GH.Test\bin\Debug\GH.Memberships.pdb
+D:\gigahertz_source\GH.Test\bin\Debug\GH.Web.pdb
+D:\gigahertz_source\GH.Test\bin\Debug\EntityFramework.xml
+D:\gigahertz_source\GH.Test\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\gigahertz_source\GH.Test\obj\Debug\GH.Test.csprojResolveAssemblyReference.cache
+D:\gigahertz_source\GH.Test\obj\Debug\GH.Test.dll
+D:\gigahertz_source\GH.Test\obj\Debug\GH.Test.pdb
+D:\gigahertz_source\GH.Test\bin\Debug\crystaldecisions.web.dll
