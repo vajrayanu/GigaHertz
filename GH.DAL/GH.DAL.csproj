@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89FD0D9F-19AE-42E4-BC86-6749524A01CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GH.DAL</RootNamespace>
+    <AssemblyName>GH.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\DateExtension.cs" />
+    <Compile Include="Helpers\ImageExtension.cs" />
+    <Compile Include="Helpers\ObjectContextExtensions.cs" />
+    <Compile Include="Helpers\OpenBookingExtensions.cs" />
+    <Compile Include="Helpers\StringExtension.cs" />
+    <Compile Include="Model\ApplicationSetting.cs" />
+    <Compile Include="Model\CauseToClaim.cs" />
+    <Compile Include="Model\ClaimCause.cs" />
+    <Compile Include="Model\ClaimStatus.cs" />
+    <Compile Include="Model\CloseStatus.cs" />
+    <Compile Include="Model\RepairCauseEstimate.cs" />
+    <Compile Include="Model\ProcessStatus.cs" />
+    <Compile Include="Model\FileUpload.cs" />
+    <Compile Include="Model\Remind.cs" />
+    <Compile Include="Model\RemindHistory.cs" />
+    <Compile Include="Model\RepairBack.cs" />
+    <Compile Include="Model\Report.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\StaffPosition.cs" />
+    <Compile Include="Model\ProductToClaim.cs" />
+    <Compile Include="Model\RepairCause.cs" />
+    <Compile Include="Model\RepairStatus.cs" />
+    <Compile Include="Model\Brand.cs" />
+    <Compile Include="Model\Cause.cs" />
+    <Compile Include="Model\Claim.cs" />
+    <Compile Include="Model\Color.cs" />
+    <Compile Include="Model\NextItemNo.cs" />
+    <Compile Include="Model\Repair.cs" />
+    <Compile Include="Model\ProductAccessorie.cs" />
+    <Compile Include="Model\StaffUser.cs" />
+    <Compile Include="Model\StaffRole.cs" />
+    <Compile Include="Model\Insurance.cs" />
+    <Compile Include="Model\ProductType.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Staff.cs" />
+    <Compile Include="Model\TrackingCounter.cs" />
+    <Compile Include="Model\Transport.cs" />
+    <Compile Include="Model\User.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\WorkingStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLDAL\BrandManager.cs" />
+    <Compile Include="SQLDAL\CauseManager.cs" />
+    <Compile Include="SQLDAL\ColorManager.cs" />
+    <Compile Include="SQLDAL\ClaimManager.cs" />
+    <Compile Include="SQLDAL\ClaimStatusManager.cs" />
+    <Compile Include="SQLDAL\ClaimCourseManager.cs" />
+    <Compile Include="SQLDAL\ClaimNextItemNoManager.cs" />
+    <Compile Include="SQLDAL\CloseStatusManager.cs" />
+    <Compile Include="SQLDAL\TrackingCounterManager.cs" />
+    <Compile Include="SQLDAL\RepairCauseEstimateManager.cs" />
+    <Compile Include="SQLDAL\RemindManager.cs" />
+    <Compile Include="SQLDAL\ProcessStatusManager.cs" />
+    <Compile Include="SQLDAL\FileUploadManager.cs" />
+    <Compile Include="SQLDAL\RemindHistoryManager.cs" />
+    <Compile Include="SQLDAL\RepairBackManager.cs" />
+    <Compile Include="SQLDAL\ReportManager.cs" />
+    <Compile Include="SQLDAL\StaffPositionManager.cs" />
+    <Compile Include="SQLDAL\RepairCauseManager.cs" />
+    <Compile Include="SQLDAL\RepairStatusManager.cs" />
+    <Compile Include="SQLDAL\NextItemNoManager.cs" />
+    <Compile Include="SQLDAL\RepairManager.cs" />
+    <Compile Include="SQLDAL\ProductAccessorieManager.cs" />
+    <Compile Include="SQLDAL\ApplicationSettingManager.cs" />
+    <Compile Include="SQLDAL\StaffRoleManager.cs" />
+    <Compile Include="SQLDAL\StaffUserManager.cs" />
+    <Compile Include="SQLDAL\TransportManager.cs" />
+    <Compile Include="SQLDAL\InsuranceManager.cs" />
+    <Compile Include="SQLDAL\StaffManager.cs" />
+    <Compile Include="SQLDAL\CustomerManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Context\GigahertzEntities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SQLDAL\ProductManager.cs" />
+    <Compile Include="SQLDAL\ProductTypeManager.cs" />
+    <Compile Include="SQLDAL\WorkingStatusManager.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
